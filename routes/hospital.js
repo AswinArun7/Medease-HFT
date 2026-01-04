@@ -28,19 +28,19 @@ router.post("/register", async (req, res) => {
 
         // Validate required fields
         if (!username || !email || !password || !address || !phone || !city || !uniqueCode) {
-            return res.send('<script>alert("Please fill in all required fields including Unique Code"); window.location="/hospital/register";</script>')
+            return res.redirect('/hospital/register?error=missing_fields')
         }
 
         // Check if email already exists
         const existingHospital = await hostpitalModel.findOne({ email: email })
         if (existingHospital) {
-            return res.send('<script>alert("Email already exists. Please use a different email or login."); window.location="/hospital/register";</script>')
+            return res.redirect('/hospital/register?error=email_exists')
         }
 
         // Check if uniqueCode already exists
         const existingCode = await hostpitalModel.findOne({ uniqueCode: uniqueCode })
         if (existingCode) {
-            return res.send('<script>alert("Unique Code already exists. Please choose a different code."); window.location="/hospital/register";</script>')
+            return res.redirect('/hospital/register?error=code_exists')
         }
 
 
@@ -58,10 +58,10 @@ router.post("/register", async (req, res) => {
         await newHospital.save()
 
 
-        res.send('<script>alert("Registration successful! Please login."); window.location="/hospital/login";</script>')
+        res.redirect('/hospital/login?success=registered')
     } catch (error) {
         console.log(error)
-        res.send('<script>alert("Registration failed. Please try again."); window.location="/hospital/register";</script>')
+        res.redirect('/hospital/register?error=registration_failed')
     }
 })
 

@@ -557,26 +557,26 @@
                                                     </div>
                                                 </th>
                                                 <th>Name</th>
-
-                                                <th>Treatment</th>
+                                                <th>Symptoms</th>
                                                 <th>Mobile</th>
                                                 <th>Email</th>
                                                 <th>Date</th>
-                                                <th>Time</th>
+                                                <th>Hospital</th>
                                                 <th>Mode</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% for(appointment of appointments ) { %>
+                                            <% if (appointments && appointments.length > 0) { %>
+                                                <% for(appointment of appointments ) { %>
                                                 <tr>
                                                     <td class="profile-image"><a href="profile.html"><img width="28"
                                                                 height="28" src="/assets/img/profiles/avatar-01.jpg"
                                                                 class="rounded-circle m-r-5" alt>
-                                                            <%= appointment.firstname %>
+                                                            <%= appointment.firstname %> <%= appointment.lastname %>
                                                         </a></td>
 
                                                     <td>
-                                                        <%= appointment.symptom %>
+                                                        <%= appointment.Symptom || 'N/A' %>
                                                     </td>
                                                     <td><a href="javascript:;">
                                                             <%= appointment.mobile %>
@@ -591,10 +591,14 @@
                                                         <%= appointment.date %>
                                                     </td>
                                                     <td>
-                                                        <%=appointment.from %>
+                                                        <%= appointment.Hospital || 'N/A' %>
                                                     </td>
                                                     <td>
-                                                        <%=appointment.mode %>
+                                                        <% if (appointment.mode === 'online') { %>
+                                                            <span class="badge bg-success">Online</span>
+                                                        <% } else { %>
+                                                            <span class="badge bg-primary">Offline</span>
+                                                        <% } %>
                                                     </td>
                                                     <td class="text-end">
                                                         <div class="dropdown dropdown-action">
@@ -613,6 +617,16 @@
                                                     </td>
                                                 </tr>
                                                 <% } %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="8" class="text-center py-4">
+                                                        <div style="padding: 20px;">
+                                                            <i class="fas fa-calendar-times" style="font-size: 48px; color: #ccc; margin-bottom: 10px;"></i>
+                                                            <p class="text-muted">No appointments found</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <% } %>
 
                                         </tbody>
                                     </table>

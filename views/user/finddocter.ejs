@@ -225,156 +225,108 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card doctor-card">
+        <!-- Search and Filter Section -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card">
               <div class="card-body">
-                <div class="doctor-image">
-                  <img src="/assets/img/profiles/avatar-01.jpg" alt class="rounded-circle" style="height: 70px;" />
-                </div>
-                <div class="doctor-info">
-                  <h5>Dr.Andrea Lalema</h5>
-                  <p>Cardiology</p>
-                </div>
-                <div class="doctor-schedule">
-                  <p>Mon - Sun</p>
-                  <p>09:00 AM - 06:00 PM</p>
-                </div>
-                <div class="doctor-status">
-                  <button class="custom-badge status-green">Active</button>
-                </div>
-                <div class="doctor-action">
-                  <div class="dropdown dropdown-action">
-                    <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="Butt"></i>
-                      <button style="margin-right: 60px;" class="btn btn-primary">Consult now</button>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="edit-schedule.html">
-                        <i class="fa-solid fa-pen-to-square m-r-5"></i>
-                        Edit
-                      </a>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_patient">
-                        <i class="fa fa-trash-alt m-r-5"></i>
-                        Delete
-                      </a>
+                <h5 class="card-title">Search & Filter Doctors</h5>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="input-block local-forms">
+                      <label>Search by Name</label>
+                      <input type="text" class="form-control" id="searchName" placeholder="Enter doctor name...">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="input-block local-forms">
+                      <label>Filter by Specialty</label>
+                      <select class="form-control" id="filterSpecialty">
+                        <option value="">All Specialties</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Endocrinology">Endocrinology</option>
+                        <option value="Gastroenterology">Gastroenterology</option>
+                        <option value="Hematology">Hematology</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Oncology">Oncology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Pulmonology">Pulmonology</option>
+                        <option value="Radiology">Radiology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Rheumatology">Rheumatology</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="input-block local-forms">
+                      <label>Filter by Hospital</label>
+                      <select class="form-control" id="filterHospital">
+                        <option value="">All Hospitals</option>
+                        <% if (typeof hospitals !== 'undefined' && hospitals) { %>
+                          <% for(let hospital of hospitals) { %>
+                            <option value="<%= hospital.username %>"><%= hospital.username %></option>
+                          <% } %>
+                        <% } %>
+                      </select>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card doctor-card">
-              <div class="card-body">
-                <div class="doctor-image">
-                  <img src="/assets/img/profiles/avatar-03.jpg" alt class="rounded-circle" style="height: 70px;" />
-                </div>
-                <div class="doctor-info">
-                  <h5>Dr.William Stephin</h5>
-                  <p>Radiology</p>
-                </div>
-                <div class="doctor-schedule">
-                  <p>Mon - Fri</p>
-                  <p>09:00 AM - 06:00 PM</p>
-                </div>
-                <div class="doctor-status">
-                  <button class="custom-badge status-green">Active</button>
-                </div>
-                <div class="doctor-action">
-                  <div class="dropdown dropdown-action">
-                    <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      <button style="margin-right: 60px;" class="btn btn-primary">Consult now</button>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="edit-schedule.html">
-                        <i class="fa-solid fa-pen-to-square m-r-5"></i>
-                        Edit
-                      </a>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_patient">
-                        <i class="fa fa-trash-alt m-r-5"></i>
-                        Delete
-                      </a>
+        </div>
+
+        <div class="row" id="doctorsContainer">
+          <% if (typeof doctors !== 'undefined' && doctors && doctors.length > 0) { %>
+            <% for(let doctor of doctors) { %>
+              <div class="col-md-4">
+                <div class="card doctor-card">
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <div class="doctor-image" style="margin-right: 15px;">
+                        <i class="fas fa-user-md" style="font-size: 50px; color: #2E37A4;"></i>
+                      </div>
+                      <div class="flex-grow-1 text-start">
+                        <div class="doctor-info">
+                          <h5 class="mb-1">Dr. <%= doctor.firstname %> <%= doctor.lastname || '' %></h5>
+                          <p class="mb-1"><span class="badge bg-primary"><%= doctor.department || 'General' %></span></p>
+                          <% if (doctor.experience) { %>
+                            <small class="text-muted d-block mb-2"><%= doctor.experience %> years experience</small>
+                          <% } %>
+                        </div>
+                        <div class="doctor-schedule">
+                          <% if (doctor.timings) { %>
+                            <p class="mb-1 small"><%= doctor.timings %></p>
+                          <% } %>
+                          <% if (doctor.hospital) { %>
+                            <p class="mb-0 small"><%= doctor.hospital %></p>
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex gap-2 mt-3">
+                      <div class="flex-fill text-center">
+                        <button class="custom-badge status-green w-100">Active</button>
+                      </div>
+                      <div class="flex-fill">
+                        <a href="/appointment" class="w-100">
+                          <button class="btn btn-primary w-100">Consult now</button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card doctor-card">
-              <div class="card-body">
-                <div class="doctor-image">
-                  <img src="/assets/img/profiles/avatar-05.jpg" alt class="rounded-circle" style="height: 70px;" />
-                </div>
-                <div class="doctor-info">
-                  <h5>Mark Hay Smith</h5>
-                  <p>Gynocolgy</p>
-                </div>
-                <div class="doctor-schedule">
-                  <p>Sat - Sun</p>
-                  <p>09:00 AM - 12:00 PM</p>
-                </div>
-                <div class="doctor-status">
-                  <button class="custom-badge status-green">Active</button>
-                </div>
-                <div class="doctor-action">
-                  <div class="dropdown dropdown-action">
-                    <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      <button style="margin-right: 60px;" class="btn btn-primary">Consult now</button>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="edit-schedule.html">
-                        <i class="fa-solid fa-pen-to-square m-r-5"></i>
-                        Edit
-                      </a>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_patient">
-                        <i class="fa fa-trash-alt m-r-5"></i>
-                        Delete
-                      </a>
-                    </div>
-                  </div>
-                </div>
+            <% } %>
+          <% } else { %>
+            <div class="col-12">
+              <div class="alert alert-info text-center">
+                <h5>No Doctors Found</h5>
+                <p>There are currently no doctors registered in the system. Please try again later.</p>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card doctor-card">
-              <div class="card-body">
-                <div class="doctor-image">
-                  <img src="/assets/img/profiles/avatar-01.jpg" alt class="rounded-circle" style="height: 70px;" />
-                </div>
-                <div class="doctor-info">
-                  <h5>Dr.Andrea Lalema</h5>
-                  <p>Otolaryngology</p>
-                </div>
-                <div class="doctor-schedule">
-                  <p>Mon - Sun</p>
-                  <p>09:00 AM - 06:00 PM</p>
-                </div>
-                <div class="doctor-status">
-                  <button class="custom-badge status-green">Active</button>
-                </div>
-                <div class="doctor-action">
-                  <div class="dropdown dropdown-action">
-                    <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      <button style="margin-right: 60px;" class="btn btn-primary">Consult now</button>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="edit-schedule.html">
-                        <i class="fa-solid fa-pen-to-square m-r-5"></i>
-                        Edit
-                      </a>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_patient">
-                        <i class="fa fa-trash-alt m-r-5"></i>
-                        Delete
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <% } %>
 
           <div class="notification-box">
             <div class="msg-sidebar notifications msg-noti">
@@ -626,6 +578,63 @@
       <script src="/assets/js/app.js" type="1002f017e53fdfe2de73a326-text/javascript"></script>
       <script src="/../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="1002f017e53fdfe2de73a326-|49" defer></script>
+      
+      <!-- Doctor Search and Filter Script -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const searchName = document.getElementById('searchName');
+          const filterSpecialty = document.getElementById('filterSpecialty');
+          const filterHospital = document.getElementById('filterHospital');
+          const doctorsContainer = document.getElementById('doctorsContainer');
+          const doctorCards = doctorsContainer.querySelectorAll('.col-md-4');
+
+          function filterDoctors() {
+            const nameQuery = searchName.value.toLowerCase();
+            const specialtyQuery = filterSpecialty.value.toLowerCase();
+            const hospitalQuery = filterHospital.value.toLowerCase();
+
+            let visibleCount = 0;
+
+            doctorCards.forEach(card => {
+              const doctorName = card.querySelector('.doctor-info h5').textContent.toLowerCase();
+              const doctorSpecialty = card.querySelector('.doctor-info p').textContent.toLowerCase();
+              const doctorSchedule = card.querySelector('.doctor-schedule p:last-child');
+              const doctorHospital = doctorSchedule ? doctorSchedule.textContent.toLowerCase() : '';
+
+              const matchesName = !nameQuery || doctorName.includes(nameQuery);
+              const matchesSpecialty = !specialtyQuery || doctorSpecialty.includes(specialtyQuery);
+              const matchesHospital = !hospitalQuery || doctorHospital.includes(hospitalQuery);
+
+              if (matchesName && matchesSpecialty && matchesHospital) {
+                card.style.display = '';
+                visibleCount++;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            // Show "no results" message if needed
+            let noResultsMsg = document.getElementById('noResultsMsg');
+            if (visibleCount === 0 && doctorCards.length > 0) {
+              if (!noResultsMsg) {
+                noResultsMsg = document.createElement('div');
+                noResultsMsg.id = 'noResultsMsg';
+                noResultsMsg.className = 'col-12';
+                noResultsMsg.innerHTML = '<div class="alert alert-warning text-center"><h5>No Doctors Found</h5><p>No doctors match your search criteria. Try adjusting your filters.</p></div>';
+                doctorsContainer.appendChild(noResultsMsg);
+              }
+              noResultsMsg.style.display = '';
+            } else if (noResultsMsg) {
+              noResultsMsg.style.display = 'none';
+            }
+          }
+
+          // Add event listeners
+          if (searchName) searchName.addEventListener('input', filterDoctors);
+          if (filterSpecialty) filterSpecialty.addEventListener('change', filterDoctors);
+          if (filterHospital) filterHospital.addEventListener('change', filterDoctors);
+        });
+      </script>
 </body>
 
 </html>

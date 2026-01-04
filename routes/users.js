@@ -40,18 +40,18 @@ router.post("/register", async function (req, res, next) {
         errorMsg += "MongoDB is connecting... Please wait a moment and try again."
       }
       errorMsg += "\\n\\nCheck your server console for MongoDB connection errors."
-      return res.send(`<script>alert("${errorMsg}"); window.location="/register";</script>`)
+      return res.redirect('/register?error=db_connection')
     }
 
     // Validate required fields
     if (!name || !email || !password || !age || !gender || !city || !phone) {
-      return res.send('<script>alert("Please fill in all required fields"); window.location="/register";</script>')
+      return res.redirect('/register?error=missing_fields')
     }
 
     // Check if email already exists
     const existingPatient = await patientModel.findOne({ email: email })
     if (existingPatient) {
-      return res.send('<script>alert("Email already exists. Please use a different email or login."); window.location="/register";</script>')
+      return res.redirect('/register?error=email_exists')
     }
 
     const newPatient = new patientModel({
@@ -67,11 +67,11 @@ router.post("/register", async function (req, res, next) {
     await newPatient.save()
     console.log("Patient registered successfully:", newPatient._id)
 
-    res.send('<script>alert("Registration successful! Please login."); window.location="/login";</script>')
+    res.redirect('/login?success=registered')
   } catch (error) {
     console.error("Registration error:", error)
     const errorMessage = error.message || "Registration failed. Please try again."
-    res.send(`<script>alert("Registration failed: ${errorMessage}"); window.location="/register";</script>`)
+    res.redirect('/register?error=registration_failed')
   }
 })
 
@@ -213,16 +213,39 @@ router.post('/generate-story', async (req, res) => {
 });
 
 
-router.get('/appointment', async (rea, res) => {
-  const doctors = await doctorModel.find({})
-  const hospitals = await hospitalModel.find({})
-  res.render('user/appointment', { doctors, hospitals })
+router.get('/appointment', authMiddleware, async (req, res) => {
+  try {
+    const doctors = await doctorModel.find({})
+    const hospitals = await hospitalModel.find({})
+    
+    // Fetch user appointments based on email
+    const userEmail = req.session.user ? req.session.user.email : null
+    let appointments = []
+    if (userEmail) {
+      appointments = await appointmentModel.find({ email: userEmail }).sort({ date: -1 })
+    }
+    
+    res.render('user/appointment', { doctors, hospitals, appointments, user: req.session.user })
+  } catch (error) {
+    console.error('Error fetching appointment data:', error)
+    res.render('user/appointment', { doctors: [], hospitals: [], appointments: [], user: req.session.user })
+  }
 })
 //booking an appointment
 
 router.post("/book-appointment", async (req, res) => {
   try {
-    const { firstname, lastname, gender, mobile, email, address, date, From, To, doctor, Hospital, Symptom, mode } = req.body
+    const { firstname, lastname, gender, mobile, email, address, date, doctor, hospital, Symptom, mode } = req.body
+    
+    // If hospital is uniqueCode, fetch the hospital name
+    let hospitalName = hospital
+    if (hospital) {
+      const hospitalDoc = await hospitalModel.findOne({ uniqueCode: hospital })
+      if (hospitalDoc) {
+        hospitalName = hospitalDoc.username
+      }
+    }
+    
     await new appointmentModel({
       firstname,
       lastname,
@@ -231,16 +254,15 @@ router.post("/book-appointment", async (req, res) => {
       email,
       address,
       date,
-      From,
-      To,
       doctor,
-      Hospital,
+      Hospital: hospitalName,
       Symptom,
       mode,
     }).save()
-    res.send('<script>alert("Appointment booked successfully")</script>')
+    res.redirect('/appointment?success=true')
   } catch (error) {
-
+    console.error("Appointment booking error:", error)
+    res.redirect('/appointment?error=true')
   }
 })
 
@@ -248,8 +270,10 @@ router.get('/pharma', authMiddleware, (req, res) => {
   res.render('user/pharma/pharma')
 })
 
-router.get('/finddocters', authMiddleware, (req, res) => {
-  res.render('user/finddocter')
+router.get('/finddocters', authMiddleware, async (req, res) => {
+  const doctors = await doctorModel.find({})
+  const hospitals = await hospitalModel.find({})
+  res.render('user/finddocter', { doctors, hospitals })
 })
 
 router.get('/genaral', authMiddleware, (req, res) => {

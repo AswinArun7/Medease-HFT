@@ -249,6 +249,18 @@
                 </div>
               </div>
               <div class="card-body">
+                <!-- Success/Error Messages -->
+                <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none; border-left: 4px solid #28a745;">
+                  <i class="fas fa-check-circle me-2"></i>
+                  <strong>Success!</strong> Your appointment has been booked successfully.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none; border-left: 4px solid #dc3545;">
+                  <i class="fas fa-exclamation-circle me-2"></i>
+                  <strong>Error!</strong> Failed to book appointment. Please try again.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
                 <!-- Book Appointment Form Section -->
                 <div id="bookAppointmentSection">
                   <form action="/book-appointment" method="post">
@@ -306,8 +318,8 @@
                       </div>
                       <div class="col-12 col-md-6 col-xl-6">
                         <div class="input-block local-forms">
-                          <label>Age <span class="login-danger">*</span></label>
-                          <input name="age" class="form-control" type="number" min="1" max="150" />
+                          <label>Email <span class="login-danger">*</span></label>
+                          <input name="email" class="form-control" type="email" value="<%= user && user.email ? user.email : '' %>" readonly style="background-color: #f8f9fa;" />
                         </div>
                       </div>
                       <div class="col-12 col-sm-12">
@@ -317,21 +329,13 @@
                         </div>
                       </div>
 
-                      <div class="col-12 col-md-6 col-xl-4">
-                        <div class="input-block local-forms cal-icon">
-                          <label>Date of Appointment
-                            <span class="login-danger">*</span></label>
-                          <input name="date" class="form-control datetimepicker" type="date" />
-                        </div>
-                      </div>
-
-                      <div class="col-12 col-md-6 col-xl-6">
+                      <div class="col-12 col-md-6 col-xl-3">
                         <div class="input-block local-forms">
                           <label>Hospital</label>
                           <select class="form-control" name="hospital" id="hospitalSelect">
                             <option value="">Select Hospital</option>
                             <% for( hospital of hospitals ) { %>
-                              <option value="<%= hospital.username %>">Dr .<%= hospital.username %>
+                              <option value="<%= hospital.uniqueCode %>"><%= hospital.username %> (<%= hospital.uniqueCode %>)
                               </option>
                               <% } %>
 
@@ -340,7 +344,16 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-12 col-md-6 col-xl-6">
+
+                      <div class="col-12 col-md-6 col-xl-3">
+                        <div class="input-block local-forms cal-icon">
+                          <label>Date of Appointment
+                            <span class="login-danger">*</span></label>
+                          <input name="date" class="form-control datetimepicker" type="date" />
+                        </div>
+                      </div>
+                      
+                      <div class="col-12 col-md-6 col-xl-3">
                         <div class="input-block local-forms">
                           <label>Speciality</label>
                           <select class="form-control" name="specialty" id="specialtySelect">
@@ -358,30 +371,57 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-12 col-md-6 col-xl-6">
+                      
+                      <div class="col-12 col-md-6 col-xl-3">
                         <div class="input-block local-forms">
-                          <label>Consulting Doctor</label>
+                          <label class="mb-2">Consulting Doctor <span class="text-danger">*</span></label>
                           <input type="hidden" name="doctor" id="selectedDoctorValue" />
-                          <div class="form-control p-0 d-flex align-items-center"
-                            style="overflow: hidden; height: 46px;">
-                            <button type="button" class="btn rounded-0 h-100 px-3" onclick="openDoctorSelector()"
-                              style="background-color: #e9ecef; border: none; color: #495057; border-right: 1px solid #ced4da;">
-                              Choose Doctor*
-                            </button>
-                            <span id="selectedDoctorDisplay" class="ms-3 text-muted">No doctor selected</span>
+                          <div class="doctor-selector-card" onclick="openDoctorSelector()" style="cursor: pointer; border: 2px solid #e0e0e0; border-radius: 8px; padding: 10px 12px; transition: all 0.3s; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
+                            <div class="d-flex align-items-center justify-content-between">
+                              <div class="d-flex align-items-center flex-grow-1">
+                                <div class="doctor-icon-wrapper" style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin-right: 10px; flex-shrink: 0;">
+                                  <i class="fas fa-user-md" style="color: white; font-size: 16px;"></i>
+                                </div>
+                                <div id="selectedDoctorInfo" style="min-width: 0; flex: 1;">
+                                  <div id="selectedDoctorDisplay" class="text-muted text-truncate" style="font-size: 13px; font-weight: 500;">
+                                    Select doctor
+                                  </div>
+                                  <small id="selectedDoctorMeta" class="text-muted text-truncate" style="font-size: 11px; display: none;"></small>
+                                </div>
+                              </div>
+                              <div class="arrow-icon" style="color: #667eea; font-size: 14px; margin-left: 8px;">
+                                <i class="fas fa-chevron-right"></i>
+                              </div>
+                            </div>
                           </div>
                           <!-- Doctor data stored in hidden script tag -->
                           <script type="application/json" id="doctorData">
                             [
                               <% for(let i = 0; i < doctors.length; i++) { %>
-                                {"name": "<%= doctors[i].firstname %>", "department": "<%= doctors[i].department %>"}<%- i < doctors.length - 1 ? ',' : '' %>
+                                {"name": "<%= doctors[i].firstname %>", "department": "<%= doctors[i].department %>", "hospital": "<%= doctors[i].hospital || '' %>"}<%- i < doctors.length - 1 ? ',' : '' %>
                               <% } %>
                             ]
                           </script>
+                          <style>
+                            .doctor-selector-card:hover {
+                              border-color: #667eea !important;
+                              box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+                              transform: translateY(-1px);
+                            }
+                            .doctor-selector-card.selected {
+                              border-color: #667eea !important;
+                              background: linear-gradient(135deg, #f0f3ff 0%, #ffffff 100%) !important;
+                            }
+                          </style>
                         </div>
                       </div>
 
-
+                      <div class="col-12">
+                        <div class="input-block local-forms">
+                          <label>Symptoms / Reason for Visit <span class="login-danger">*</span></label>
+                          <textarea name="Symptom" class="form-control" rows="3" cols="30" placeholder="Describe your symptoms or reason for consultation..."></textarea>
+                        </div>
+                      </div>
 
                       <div class="col-12">
                         <div class="doctor-submit text-end">
@@ -402,15 +442,47 @@
                   <div class="row">
                     <div class="col-12">
                       <h5 style="margin-bottom: 20px; color: #333;">Your Appointments</h5>
-                      <div class="alert alert-info" style="text-align: center; padding: 40px;">
-                        <i class="fas fa-calendar-times"
-                          style="font-size: 48px; color: #6c757d; margin-bottom: 15px;"></i>
-                        <h6 style="color: #6c757d;">You have no pending appointments</h6>
-                      </div>
+                      <% if (typeof appointments !== 'undefined' && appointments && appointments.length > 0) { %>
+                        <div class="row">
+                          <% for(let appointment of appointments) { %>
+                            <div class="col-md-6 col-lg-4 mb-3">
+                              <div class="card" style="border-radius: 10px; border: 2px solid #e8e8e8; transition: all 0.3s;">
+                                <div class="card-body">
+                                  <div class="d-flex align-items-center mb-3">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                      <i class="fas fa-calendar-check" style="color: white; font-size: 18px;"></i>
+                                    </div>
+                                    <div>
+                                      <h6 class="mb-0"><%= appointment.firstname %> <%= appointment.lastname %></h6>
+                                      <small class="text-muted"><%= appointment.email %></small>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                  <div class="appointment-details">
+                                    <p class="mb-2"><strong><i class="fas fa-user-md me-2"></i>Doctor:</strong> Dr. <%= appointment.doctor %></p>
+                                    <p class="mb-2"><strong><i class="fas fa-hospital me-2"></i>Hospital:</strong> <%= appointment.Hospital || 'N/A' %></p>
+                                    <p class="mb-2"><strong><i class="fas fa-calendar me-2"></i>Date:</strong> <%= appointment.date %></p>
+                                    <p class="mb-2"><strong><i class="fas fa-stethoscope me-2"></i>Specialty:</strong> <%= appointment.Symptom || 'N/A' %></p>
+                                    <p class="mb-2"><strong><i class="fas fa-video me-2"></i>Mode:</strong> <span class="badge <%= appointment.mode === 'online' ? 'bg-success' : 'bg-primary' %>"><%= appointment.mode || 'offline' %></span></p>
+                                  </div>
+                                  <div class="mt-3">
+                                    <button class="btn btn-sm btn-outline-primary w-100">View Details</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% } %>
+                        </div>
+                      <% } else { %>
+                        <div class="alert alert-info" style="text-align: center; padding: 40px;">
+                          <i class="fas fa-calendar-times"
+                            style="font-size: 48px; color: #6c757d; margin-bottom: 15px;"></i>
+                          <h6 style="color: #6c757d;">You have no appointments yet</h6>
+                          <p class="text-muted">Book your first appointment to see it here</p>
+                        </div>
+                      <% } %>
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -639,6 +711,69 @@
           </div>
         </div>
       </div>
+      
+      <!-- Doctor Selection Modal -->
+      <div id="doctorSelectionModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px 12px 0 0; border: none; padding: 16px 20px;">
+              <h6 class="modal-title text-white mb-0" style="font-weight: 600;">
+                <i class="fas fa-user-md me-2"></i>Select a Doctor
+              </h6>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+              <div id="doctorListContainer" class="list-group" style="max-height: 350px; overflow-y: auto;">
+                <!-- Doctor list will be populated here -->
+              </div>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid #f0f0f0; padding: 12px 20px;">
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal" style="border-radius: 6px;">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <style>
+        #doctorListContainer .list-group-item {
+          border: 1px solid #e8e8e8;
+          border-radius: 8px;
+          margin-bottom: 8px;
+          transition: all 0.3s;
+          padding: 12px;
+        }
+        #doctorListContainer .list-group-item:hover {
+          border-color: #667eea;
+          background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+          transform: translateX(5px);
+          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+        #doctorListContainer::-webkit-scrollbar {
+          width: 6px;
+        }
+        #doctorListContainer::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+        #doctorListContainer::-webkit-scrollbar-thumb {
+          background: #667eea;
+          border-radius: 10px;
+        }
+        #doctorListContainer::-webkit-scrollbar-thumb:hover {
+          background: #764ba2;
+        }
+        
+        /* Appointment card hover effect */
+        #myAppointmentsSection .card {
+          transition: all 0.3s ease;
+        }
+        #myAppointmentsSection .card:hover {
+          border-color: #667eea !important;
+          box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+          transform: translateY(-5px);
+        }
+      </style>
+
       <div id="delete_patient" class="modal fade delete-modal" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -678,62 +813,160 @@
         return [];
       }
 
-      // Filter doctors based on selected speciality
+      // Filter doctors based on selected speciality and hospital
       function filterDoctorsBySpeciality() {
         // Reset doctor selection when specialty changes
+        resetDoctorSelection();
+      }
+
+      // Also reset when hospital changes
+      function filterDoctorsByHospital() {
+        // Reset doctor selection when hospital changes
+        resetDoctorSelection();
+      }
+
+      function resetDoctorSelection() {
         document.getElementById('selectedDoctorValue').value = '';
-        document.getElementById('selectedDoctorDisplay').textContent = 'No doctor selected';
+        document.getElementById('selectedDoctorDisplay').textContent = 'Click to select a doctor';
         document.getElementById('selectedDoctorDisplay').classList.add('text-muted');
         document.getElementById('selectedDoctorDisplay').classList.remove('text-dark');
+        document.getElementById('selectedDoctorMeta').style.display = 'none';
+        
+        const selectorCard = document.querySelector('.doctor-selector-card');
+        if (selectorCard) {
+          selectorCard.classList.remove('selected');
+        }
       }
 
       // Open doctor selector
       function openDoctorSelector() {
         const specialtySelect = document.getElementById('specialtySelect');
+        const hospitalSelect = document.getElementById('hospitalSelect');
         const selectedSpecialty = specialtySelect ? specialtySelect.value : '';
+        const selectedHospital = hospitalSelect ? hospitalSelect.value : '';
 
-        if (!selectedSpecialty) {
-          alert('Please select a Speciality first before choosing a doctor.');
+        if (!selectedSpecialty && !selectedHospital) {
+          alert('Please select a Hospital or Speciality first before choosing a doctor.');
           return;
         }
 
-        // Get all doctors and filter by specialty
+        // Get all doctors and filter by specialty and/or hospital
         const allDoctors = getDoctorData();
-        const filteredDoctors = allDoctors.filter(doc => doc.department === selectedSpecialty);
+        let filteredDoctors = allDoctors;
+
+        // Filter by specialty if selected
+        if (selectedSpecialty) {
+          filteredDoctors = filteredDoctors.filter(doc => doc.department === selectedSpecialty);
+        }
+
+        // Filter by hospital if selected
+        if (selectedHospital) {
+          // Get hospital name from the select option text
+          const hospitalOption = hospitalSelect.options[hospitalSelect.selectedIndex];
+          const hospitalName = hospitalOption ? hospitalOption.text.split('(')[0].trim() : '';
+          
+          filteredDoctors = filteredDoctors.filter(doc => doc.hospital && doc.hospital.includes(hospitalName));
+        }
 
         if (filteredDoctors.length === 0) {
-          alert('No doctors available for the selected speciality.');
+          alert('No doctors available for the selected criteria.');
           return;
         }
 
-        // Create a simple selection dialog
-        let doctorList = 'Available Doctors:\n\n';
+        // Populate modal with doctor list
+        const doctorListContainer = document.getElementById('doctorListContainer');
+        doctorListContainer.innerHTML = '';
+
         filteredDoctors.forEach((doc, index) => {
-          doctorList += `${index + 1}. Dr. ${doc.name}\n`;
-        });
-        doctorList += '\nEnter the number of your choice:';
-
-        const choice = prompt(doctorList);
-
-        if (choice) {
-          const choiceNum = parseInt(choice);
-          if (choiceNum >= 1 && choiceNum <= filteredDoctors.length) {
-            const selectedDoctor = filteredDoctors[choiceNum - 1];
-            document.getElementById('selectedDoctorValue').value = selectedDoctor.name;
-            document.getElementById('selectedDoctorDisplay').textContent = 'Dr. ' + selectedDoctor.name;
+          const doctorItem = document.createElement('button');
+          doctorItem.className = 'list-group-item list-group-item-action';
+          doctorItem.style.cursor = 'pointer';
+          doctorItem.innerHTML = `
+            <div class="d-flex align-items-center">
+              <i class="fas fa-user-md me-3" style="font-size: 24px; color: #2E37A4;"></i>
+              <div class="flex-grow-1 text-start">
+                <strong>Dr. ${doc.name}</strong>
+                <br>
+                <small class="text-muted">${doc.department}${doc.hospital ? ' - ' + doc.hospital : ''}</small>
+              </div>
+            </div>
+          `;
+          
+          doctorItem.addEventListener('click', function() {
+            document.getElementById('selectedDoctorValue').value = doc.name;
+            document.getElementById('selectedDoctorDisplay').textContent = 'Dr. ' + doc.name;
             document.getElementById('selectedDoctorDisplay').classList.remove('text-muted');
             document.getElementById('selectedDoctorDisplay').classList.add('text-dark');
-          } else {
-            alert('Invalid choice. Please try again.');
-          }
-        }
+            document.getElementById('selectedDoctorDisplay').style.fontWeight = '600';
+            document.getElementById('selectedDoctorDisplay').style.color = '#2c3e50';
+            
+            // Show doctor metadata
+            const metaElement = document.getElementById('selectedDoctorMeta');
+            metaElement.textContent = `${doc.department}${doc.hospital ? ' • ' + doc.hospital : ''}`;
+            metaElement.style.display = 'block';
+            
+            // Add selected state to card
+            const selectorCard = document.querySelector('.doctor-selector-card');
+            if (selectorCard) {
+              selectorCard.classList.add('selected');
+            }
+            
+            // Close modal using Bootstrap's modal instance
+            const modalElement = document.getElementById('doctorSelectionModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) {
+              modal.hide();
+            }
+          });
+          
+          doctorListContainer.appendChild(doctorItem);
+        });
+
+        // Show the modal
+        const doctorModal = new bootstrap.Modal(document.getElementById('doctorSelectionModal'));
+        doctorModal.show();
       }
 
-      // Add event listener to specialty select
+      // Add event listener to specialty and hospital selects
       document.addEventListener('DOMContentLoaded', function () {
+        // Check for success or error messages in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const success = urlParams.get('success');
+        const error = urlParams.get('error');
+        
+        if (success === 'true') {
+          const successMsg = document.getElementById('successMessage');
+          successMsg.style.display = 'block';
+          // Switch to My Appointments tab to show the booked appointment
+          switchTab('my');
+          // Remove URL parameters
+          window.history.replaceState({}, document.title, window.location.pathname);
+          // Auto-hide after 5 seconds
+          setTimeout(() => {
+            successMsg.style.display = 'none';
+          }, 5000);
+        }
+        
+        if (error === 'true') {
+          const errorMsg = document.getElementById('errorMessage');
+          errorMsg.style.display = 'block';
+          // Remove URL parameters
+          window.history.replaceState({}, document.title, window.location.pathname);
+          // Auto-hide after 5 seconds
+          setTimeout(() => {
+            errorMsg.style.display = 'none';
+          }, 5000);
+        }
+        
         const specialtySelect = document.getElementById('specialtySelect');
+        const hospitalSelect = document.getElementById('hospitalSelect');
+        
         if (specialtySelect) {
           specialtySelect.addEventListener('change', filterDoctorsBySpeciality);
+        }
+        
+        if (hospitalSelect) {
+          hospitalSelect.addEventListener('change', filterDoctorsByHospital);
         }
       });
 

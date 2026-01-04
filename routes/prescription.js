@@ -19,7 +19,7 @@ router.post("/uploadPrescription", upload.single("prescription"), async (req, re
 
         })
         await prescription.save()
-        res.status(200).send('<script>alert("Prescription uploded successfully")</script>')
+        res.redirect('/prescriptionassist?success=uploaded')
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: "Internal server error" })

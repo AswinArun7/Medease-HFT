@@ -46,7 +46,30 @@ router.get("/profile", async function (req, res, next) {
             req.session.destroy();
             return res.redirect("/doctor/login");
         }
-        res.render("doctor/doctor-dashboard", { doctor });
+        
+        // Fetch appointments for this doctor
+        const appointments = await appointmentModel.find({
+            doctor: doctor.firstname
+        }).sort({ date: 1 }).limit(10);
+        
+        // Fetch prescriptions reviewed by this doctor
+        const prescriptions = await prescriptionModel.find({
+            comment: { $exists: true, $ne: 'Wait for your answer' }
+        }).populate('userId').sort({ updatedAt: -1 }).limit(10);
+        
+        // Calculate stats
+        const totalAppointments = await appointmentModel.countDocuments({ doctor: doctor.firstname });
+        const totalPrescriptions = await prescriptionModel.countDocuments();
+        
+        res.render("doctor/doctor-dashboard", { 
+            doctor, 
+            appointments,
+            prescriptions,
+            stats: {
+                totalAppointments,
+                totalPrescriptions
+            }
+        });
     } catch (error) {
         console.log(error);
         res.status(500).send("Internal Server Error");
@@ -72,19 +95,19 @@ router.post("/register", async function (req, res, next) {
 
         // Validate required fields
         if (!name || !email || !password || !specialization || !phone || !city || !hospitalCode) {
-            return res.send('<script>alert("Please fill in all required fields including Hospital Code"); window.location="/doctor/register";</script>')
+            return res.redirect('/doctor/register?error=missing_fields')
         }
 
         // Check if email already exists
         const existingDoctor = await doctorModel.findOne({ email: email })
         if (existingDoctor) {
-            return res.send('<script>alert("Email already exists. Please use a different email or login."); window.location="/doctor/register";</script>')
+            return res.redirect('/doctor/register?error=email_exists')
         }
 
         // Verify Hospital Code
         const hospital = await hostpitalModel.findOne({ uniqueCode: hospitalCode })
         if (!hospital) {
-            return res.send('<script>alert("Invalid Hospital Code. Please check and try again."); window.location="/doctor/register";</script>')
+            return res.redirect('/doctor/register?error=invalid_hospital')
         }
 
         // Split name into firstname and lastname
@@ -109,10 +132,10 @@ router.post("/register", async function (req, res, next) {
             hospitalId: hospital._id // Link to hospital document
         })
         await doctor.save()
-        res.send('<script>alert("Registration successful! Please login."); window.location="/doctor/login";</script>')
+        res.redirect('/doctor/login?success=registered')
     } catch (error) {
         console.log(error)
-        res.send('<script>alert("Registration failed. Please try again."); window.location="/doctor/register";</script>')
+        res.redirect('/doctor/register?error=registration_failed')
     }
 })
 
@@ -153,12 +176,20 @@ router.get("/appointments", async function (req, res, next) {
 
 router.get("/appointment-List", async function (req, res, next) {
     try {
+        if (!req.session.doctorName) {
+            return res.redirect("/doctor/login")
+        }
+        
+        // Fetch appointments where doctor name matches the logged-in doctor's name
         const appointments = await appointmentModel.find({
             doctor: req.session.doctorName,
-        })
-        res.render("doctor/appointment-list", { appointments })
+        }).sort({ date: -1 })
+        
+        console.log('Doctor appointments found:', appointments.length)
+        res.render("doctor/appointment-list", { appointments, doctor: { firstname: req.session.doctorName } })
     } catch (error) {
-        console.error(error)
+        console.error('Error fetching doctor appointments:', error)
+        res.render("doctor/appointment-list", { appointments: [], doctor: { firstname: req.session.doctorName || '' } })
     }
 })
 //list all prescription
@@ -182,7 +213,7 @@ router.post("/reviewingPrescription", async function (req, res, next) {
             comment: comment,
         })
 
-        res.status(200).send("<script>alert('Prescription Reviewed');window.location='/doctor/prescriptionListing'</script>")
+        res.redirect('/doctor/prescriptionListing?success=reviewed')
     } catch (error) {
         console.error(error)
         res.status(500).send("Internal Server Error")

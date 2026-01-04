@@ -1,0 +1,66 @@
+<!-- Message Banner Component -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const error = urlParams.get('error');
+    
+    const messages = {
+      // Success messages
+      'registered': { type: 'success', text: 'Registration successful! Please login.' },
+      'uploaded': { type: 'success', text: 'Prescription uploaded successfully!' },
+      'reviewed': { type: 'success', text: 'Prescription reviewed successfully!' },
+      
+      // Error messages
+      'db_connection': { type: 'error', text: 'Database connection error. Please check server console.' },
+      'missing_fields': { type: 'error', text: 'Please fill in all required fields.' },
+      'email_exists': { type: 'error', text: 'Email already exists. Please use a different email or login.' },
+      'code_exists': { type: 'error', text: 'Unique Code already exists. Please choose a different code.' },
+      'invalid_hospital': { type: 'error', text: 'Invalid Hospital Code. Please check and try again.' },
+      'registration_failed': { type: 'error', text: 'Registration failed. Please try again.' },
+    };
+    
+    let messageData = null;
+    if (success && messages[success]) {
+      messageData = messages[success];
+    } else if (error && messages[error]) {
+      messageData = messages[error];
+    }
+    
+    if (messageData) {
+      showBanner(messageData.type, messageData.text);
+      // Clean URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  });
+  
+  function showBanner(type, text) {
+    const banner = document.createElement('div');
+    banner.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
+    banner.style.cssText = `
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      min-width: 300px;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-left: 4px solid ${type === 'success' ? '#28a745' : '#dc3545'};
+    `;
+    
+    banner.innerHTML = `
+      <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+      <strong>${type === 'success' ? 'Success!' : 'Error!'}</strong> ${text}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    document.body.appendChild(banner);
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      banner.classList.remove('show');
+      setTimeout(() => banner.remove(), 150);
+    }, 5000);
+  }
+</script>
