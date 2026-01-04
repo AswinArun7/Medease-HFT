@@ -85,10 +85,12 @@ app.use(session({
 }));
 
 
+
+
 app.use('/doctor', docterRouter);
-app.use('/', usersRouter);
-app.use("/hospital", hospitalRouter)
 app.use('/prescription', prescriptionRouter)
+app.use("/hospital", hospitalRouter)
+app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

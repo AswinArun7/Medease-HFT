@@ -223,338 +223,729 @@
                 <li class="breadcrumb-item">
                   <i class="feather-chevron-right"></i>
                 </li>
-                <li class="breadcrumb-item active">Prescriction Assist</li>
+                <li class="breadcrumb-item active">Prescription Assist</li>
               </ul>
             </div>
           </div>
         </div>
 
-        Copy code
+
         <div class="row">
           <div class="col-sm-12">
-            <div class="card">
-              <div class="card-body">
-                <form id="uploadForm" action="/prescription/uploadPrescription" method="POST"
-                  enctype="multipart/form-data">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="form-heading">
-                        <h4>Add Schedule</h4>
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-12">
-                      <p>Demystify Your Prescription Instantly: Upload and Understand Your Prescription with
-                        Professional Guidance – Free & Fast!</p>
-                      <hr>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-12" style="margin-top: 30px;">
-                      <div class="input-block local-forms">
-                        <label>Upload your Prescription <span class="login-danger">*</span></label>
-                        <input id="prescriptionUpload" name="prescription" class="form-control" type="file" />
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="doctor-submit text-end">
-                        <button type="submit" class="btn btn-primary submit-form me-2" id="submitButton">
-                          Submit
+            <div class="card" style="border: none; box-shadow: none;">
+              <div class="card-body" style="padding: 0;">
+                <style>
+                  :root {
+                    --primary-color: #2e37a4;
+                    --secondary-color: #2e37a4;
+                    --background-start: #ffffff;
+                    --background-end: #ffffff;
+                    --text-color: #000000;
+                    --card-bg: rgba(255, 255, 255, 0.8);
+                    --glass-border: rgba(255, 255, 255, 0.5);
+                  }
+
+                  .prescription-ai-container {
+                    display: flex;
+                    flex-direction: row;
+                    min-height: 70vh;
+                    gap: 2rem;
+                  }
+
+                  .prescription-left {
+                    flex: 1;
+                    background-image: url('/assets/img/prescription-bg.jpg');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    border-radius: 12px;
+                    min-height: 500px;
+                  }
+
+                  .prescription-right {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 1rem;
+                  }
+
+                  @media (max-width: 768px) {
+                    .prescription-ai-container {
+                      flex-direction: column;
+                    }
+
+                    .prescription-left {
+                      height: 300px;
+                      min-height: auto;
+                    }
+                  }
+
+                  .upload-area-ai {
+                    border: 2px solid black;
+                    border-radius: 12px;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    position: relative;
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(255, 255, 255, 0.5);
+                  }
+
+                  .upload-area-ai:hover {
+                    border-color: #55ce63;
+                    background: rgba(85, 206, 99, 0.05);
+                  }
+
+                  .file-input-ai {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                    cursor: pointer;
+                  }
+
+                  .btn-ai {
+                    background: #00d3c7;
+                    color: white;
+                    border: none;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 6px -1px rgba(85, 206, 99, 0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 60px;
+                  }
+
+                  .btn-ai:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 15px -3px rgba(85, 206, 99, 0.4);
+                  }
+
+                  .btn-ai:active {
+                    transform: translateY(0);
+                  }
+
+                  .btn-ai:disabled {
+                    background: #9ca3af;
+                    cursor: not-allowed;
+                    transform: none;
+                  }
+
+                  .modal-overlay-ai {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    backdrop-filter: blur(4px);
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 100;
+                  }
+
+                  .modal-content-ai {
+                    background: white;
+                    border-radius: 16px;
+                    width: 90%;
+                    max-width: 1000px;
+                    max-height: 85vh;
+                    display: flex;
+                    flex-direction: column;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                    animation: modalSlideUp 0.3s ease-out;
+                  }
+
+                  .modal-header-ai {
+                    padding: 1.5rem;
+                    border-bottom: 1px solid #e5e7eb;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  }
+
+                  .modal-header-ai h2 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    color: #111827;
+                  }
+
+                  .close-btn-ai {
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    color: #6b7280;
+                  }
+
+                  .modal-body-ai {
+                    padding: 1.5rem;
+                    overflow-y: auto;
+                  }
+
+                  .medicine-card {
+                    background: #f9fafb;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 10px;
+                    padding: 1.2rem;
+                    margin-bottom: 1rem;
+                    transition: box-shadow 0.2s;
+                  }
+
+                  .medicine-card:hover {
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                  }
+
+                  .medicine-name {
+                    color: #2e37a4;
+                    font-weight: 700;
+                    font-size: 1.2rem;
+                    margin-bottom: 0.5rem;
+                    display: block;
+                  }
+
+                  .detail-row {
+                    display: flex;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.95rem;
+                  }
+
+                  .detail-label {
+                    font-weight: 600;
+                    width: 120px;
+                    color: #4b5563;
+                  }
+
+                  .detail-val {
+                    color: #1f2937;
+                    flex: 1;
+                  }
+
+                  .loader-ai {
+                    display: none;
+                    margin-top: 1rem;
+                    font-weight: 500;
+                    color: var(--primary-color);
+                  }
+
+                  @keyframes modalSlideUp {
+                    from {
+                      opacity: 0;
+                      transform: translateY(20px);
+                    }
+
+                    to {
+                      opacity: 1;
+                      transform: translateY(0);
+                    }
+                  }
+
+                  @keyframes spin {
+                    0% {
+                      transform: rotate(0deg);
+                    }
+
+                    100% {
+                      transform: rotate(360deg);
+                    }
+                  }
+                </style>
+
+                <div class="prescription-ai-container">
+                  <div class="prescription-left"></div>
+                  <div class="prescription-right">
+                    <h1 style="margin-top: 2rem; margin-bottom: 4rem; text-align: center;">Prescription Assist</h1>
+
+                    <div style="width: 100%; padding: 1rem;">
+                      <form id="uploadFormAI"
+                        style="display: flex; gap: 1rem; align-items: stretch; margin-bottom: 3rem;">
+                        <div class="upload-area-ai" id="dropAreaAI">
+                          <input type="file" id="fileInputAI" class="file-input-ai" name="prescription" accept="image/*"
+                            required>
+                          <div id="fileLabelAI">
+                            <span style="font-size: 1.5rem;">📁</span>
+                            <span>Upload Prescription</span>
+                          </div>
+                        </div>
+
+                        <button type="submit" class="btn-ai" id="analyzeBtnAI" title="Analyze">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                          </svg>
                         </button>
-                        <!-- <button type="button" class="btn btn-primary cancel-form" style="display: none;" id="generateResultButton">
-                                    Generate Result
-                                </button>
-                            </div>
-                            <div id="textareaContainer" style="display: none;">
-                                <textarea class="form-control mt-3" rows="5" placeholder="Enter your text here"></textarea>
-                            </div> -->
+                      </form>
+
+                      <p
+                        style="text-align: center; color: #4b5563; font-style: italic; margin-bottom: 3rem; margin-top: -2rem;">
+                        Get an AI-powered analysis of your prescription to clearly understand medicines, their purpose,
+                        and proper intake instructions.
+                      </p>
+
+                      <div id="loaderAI" class="loader-ai" style="text-align: center; margin-bottom: 1rem;">
+                        Processing...</div>
+
+                      <h3 style="border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; margin-bottom: 1rem;">History
+                      </h3>
+                      <div id="historyContainerAI" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- History Items go here -->
                       </div>
                     </div>
-                </form>
+                  </div>
+                </div>
+
+                <!-- Results Modal -->
+                <div class="modal-overlay-ai" id="modalOverlayAI">
+                  <div class="modal-content-ai">
+                    <div class="modal-header-ai">
+                      <h2>Analysis Results</h2>
+                      <button class="close-btn-ai" id="closeModalAI">&times;</button>
+                    </div>
+                    <div class="modal-body-ai" id="resultsContainerAI">
+                      <!-- Dynamic Content Here -->
+                    </div>
+                  </div>
+                </div>
+
+                <script>
+                  const fileInputAI = document.getElementById('fileInputAI');
+                  const fileLabelAI = document.getElementById('fileLabelAI');
+                  const formAI = document.getElementById('uploadFormAI');
+                  const analyzeBtnAI = document.getElementById('analyzeBtnAI');
+                  const loaderAI = document.getElementById('loaderAI');
+                  const modalAI = document.getElementById('modalOverlayAI');
+                  const closeModalAI = document.getElementById('closeModalAI');
+                  const resultsContainerAI = document.getElementById('resultsContainerAI');
+                  const historyContainerAI = document.getElementById('historyContainerAI');
+
+                  // Load History on Start
+                  renderHistoryAI();
+
+                  fileInputAI.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                      fileLabelAI.innerHTML = `<span style="color: green; font-weight: bold;">${e.target.files[0].name}</span>`;
+                    }
+                  });
+
+                  formAI.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    if (!fileInputAI.files[0]) return;
+
+                    // UI Loading State
+                    analyzeBtnAI.disabled = true;
+                    analyzeBtnAI.innerHTML = '<div style="display:block; margin:0; width:20px; height:20px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>';
+                    loaderAI.style.display = 'block';
+
+                    const formData = new FormData();
+                    formData.append('prescription', fileInputAI.files[0]);
+
+                    try {
+                      const response = await fetch('/prescription/upload', {
+                        method: 'POST',
+                        body: formData
+                      });
+
+                      const data = await response.json();
+
+                      // Check if response contains an error
+                      if (!response.ok || data.error) {
+                        let errorMessage = data.error || 'Analysis failed';
+
+                        // Add suggestion if available
+                        if (data.suggestion) {
+                          errorMessage += '\n\n' + data.suggestion;
+                        }
+
+                        throw new Error(errorMessage);
+                      }
+
+                      // Save to History
+                      addToHistoryAI(data, fileInputAI.files[0].name);
+
+                      displayResultsAI(data);
+
+                    } catch (error) {
+                      alert('Error processing prescription: ' + error.message);
+                      console.error(error);
+                    } finally {
+                      analyzeBtnAI.disabled = false;
+                      analyzeBtnAI.innerHTML = `
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                      </svg>`;
+                      loaderAI.style.display = 'none';
+                    }
+                  });
+
+                  function displayResultsAI(data) {
+                    resultsContainerAI.innerHTML = '';
+                    const content = generateResultHTMLAI(data);
+                    resultsContainerAI.innerHTML = content;
+                    modalAI.style.display = 'flex';
+                  }
+
+                  function generateResultHTMLAI(data) {
+                    if (data.error) {
+                      return `<p style="color: red;">Error: ${data.error}</p>`;
+                    }
+                    if (Array.isArray(data) && data.length > 0) {
+                      return data.map(item => `
+                        <div class="medicine-card">
+                          <span class="medicine-name">${item.medicine_name || 'Unknown Medicine'}</span>
+                          <div class="detail-row"><span class="detail-label">Purpose:</span><span class="detail-val">${item.purpose || 'N/A'}</span></div>
+                          <div class="detail-row"><span class="detail-label">Dosage:</span><span class="detail-val">${item.dosage || 'N/A'}</span></div>
+                          <div class="detail-row"><span class="detail-label">Schedule:</span><span class="detail-val">${item.time_schedule || 'N/A'}</span></div>
+                          <div class="detail-row"><span class="detail-label">Duration:</span><span class="detail-val">${item.duration_days || 'N/A'}</span></div>
+                        </div>
+                      `).join('');
+                    }
+                    return '<p>No medicines detected or invalid format.</p>';
+                  }
+
+                  function addToHistoryAI(data, fileName) {
+                    const history = JSON.parse(localStorage.getItem('prescriptionHistory') || '[]');
+                    const entry = {
+                      id: Date.now(),
+                      fileName: fileName,
+                      date: new Date().toLocaleString(),
+                      data: data
+                    };
+                    history.unshift(entry);
+                    if (history.length > 10) history.pop();
+                    localStorage.setItem('prescriptionHistory', JSON.stringify(history));
+                    renderHistoryAI();
+                  }
+
+                  function renderHistoryAI() {
+                    const history = JSON.parse(localStorage.getItem('prescriptionHistory') || '[]');
+                    historyContainerAI.innerHTML = '';
+
+                    if (history.length === 0) {
+                      historyContainerAI.innerHTML = '<p style="color: #888; text-align: center;">No history found</p>';
+                      return;
+                    }
+
+                    history.forEach(item => {
+                      const itemDiv = document.createElement('div');
+                      itemDiv.style.background = 'rgba(255,255,255,0.6)';
+                      itemDiv.style.padding = '1rem';
+                      itemDiv.style.borderRadius = '8px';
+                      itemDiv.style.border = '1px solid rgba(255,255,255,0.5)';
+                      itemDiv.style.cursor = 'pointer';
+                      itemDiv.style.display = 'flex';
+                      itemDiv.style.justifyContent = 'space-between';
+                      itemDiv.style.alignItems = 'center';
+                      itemDiv.innerHTML = `
+                        <div>
+                          <strong>${item.fileName}</strong><br>
+                          <small>${item.date}</small>
+                        </div>
+                        <span style="color: var(--primary-color)">View &rarr;</span>
+                      `;
+                      itemDiv.onclick = () => {
+                        displayResultsAI(item.data);
+                      };
+                      historyContainerAI.appendChild(itemDiv);
+                    });
+                  }
+
+                  closeModalAI.addEventListener('click', () => {
+                    modalAI.style.display = 'none';
+                  });
+
+                  window.onclick = function (event) {
+                    if (event.target == modalAI) {
+                      modalAI.style.display = 'none';
+                    }
+                  }
+                </script>
               </div>
             </div>
           </div>
         </div>
-        <!--Showing Prescription-->
-        <div>
-          <div>
-            <% for (let prescription of prescriptions) { %>
-              <img width="50%" height="25%" src="/assets/uploads/<%=prescription.image %>" alt="img not found">
-              <div id="textareaContainer">
-                <div style="width: 90%; height: 20%; border: 1px solid black;">
-                  <p>
-                    <%=prescription.comment %>
-                  </p>
-                </div>
-                <br><br><br>
 
-              </div>
 
-              <% } %>
-          </div>
-
-          <div class="notification-box">
-            <div class="msg-sidebar notifications msg-noti">
-              <div class="topnav-dropdown-header">
-                <span>Messages</span>
-              </div>
-              <div class="drop-scroll msg-list-scroll" id="msg_list">
-                <ul class="list-box">
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">R</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Richard Miles </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+        <div class="notification-box">
+          <div class="msg-sidebar notifications msg-noti">
+            <div class="topnav-dropdown-header">
+              <span>Messages</span>
+            </div>
+            <div class="drop-scroll msg-list-scroll" id="msg_list">
+              <ul class="list-box">
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">R</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item new-message">
-                        <div class="list-left">
-                          <span class="avatar">J</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">John Doe</span>
-                          <span class="message-time">1 Aug</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                      <div class="list-body">
+                        <span class="message-author">Richard Miles </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">T</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Tarah Shropshire </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item new-message">
+                      <div class="list-left">
+                        <span class="avatar">J</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">M</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Mike Litorus</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                      <div class="list-body">
+                        <span class="message-author">John Doe</span>
+                        <span class="message-time">1 Aug</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">C</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Catherine Manseau </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">T</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">D</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Domenic Houston </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                      <div class="list-body">
+                        <span class="message-author"> Tarah Shropshire </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">B</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Buster Wigton </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">M</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">R</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Rolland Webber </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                      <div class="list-body">
+                        <span class="message-author">Mike Litorus</span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">C</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author"> Claire Mapes </span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">C</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">M</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Melita Faucher</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                      <div class="list-body">
+                        <span class="message-author"> Catherine Manseau </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">J</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Jeffery Lalor</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">D</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">L</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Loren Gatlin</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                      <div class="list-body">
+                        <span class="message-author"> Domenic Houston </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="chat.html">
-                      <div class="list-item">
-                        <div class="list-left">
-                          <span class="avatar">T</span>
-                        </div>
-                        <div class="list-body">
-                          <span class="message-author">Tarah Shropshire</span>
-                          <span class="message-time">12:28 AM</span>
-                          <div class="clearfix"></div>
-                          <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing</span>
-                        </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">B</span>
                       </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="topnav-dropdown-footer">
-                <a href="chat.html">See all messages</a>
-              </div>
+                      <div class="list-body">
+                        <span class="message-author"> Buster Wigton </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">R</span>
+                      </div>
+                      <div class="list-body">
+                        <span class="message-author"> Rolland Webber </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">C</span>
+                      </div>
+                      <div class="list-body">
+                        <span class="message-author"> Claire Mapes </span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">M</span>
+                      </div>
+                      <div class="list-body">
+                        <span class="message-author">Melita Faucher</span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">J</span>
+                      </div>
+                      <div class="list-body">
+                        <span class="message-author">Jeffery Lalor</span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">L</span>
+                      </div>
+                      <div class="list-body">
+                        <span class="message-author">Loren Gatlin</span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="chat.html">
+                    <div class="list-item">
+                      <div class="list-left">
+                        <span class="avatar">T</span>
+                      </div>
+                      <div class="list-body">
+                        <span class="message-author">Tarah Shropshire</span>
+                        <span class="message-time">12:28 AM</span>
+                        <div class="clearfix"></div>
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="topnav-dropdown-footer">
+              <a href="chat.html">See all messages</a>
             </div>
           </div>
         </div>
-        <div id="delete_patient" class="modal fade delete-modal" role="dialog">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body text-center">
-                <img src="assets/img/sent.png" alt width="50" height="46" />
-                <h3>Are you sure want to delete this ?</h3>
-                <div class="m-t-20">
-                  <a href="#" class="btn btn-white" data-bs-dismiss="modal">Close</a>
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                </div>
+      </div>
+      <div id="delete_patient" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <img src="assets/img/sent.png" alt width="50" height="46" />
+              <h3>Are you sure want to delete this ?</h3>
+              <div class="m-t-20">
+                <a href="#" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-danger">Delete</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="sidebar-overlay" data-reff></div>
-      <script src="assets/js/jquery-3.7.1.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="assets/js/bootstrap.bundle.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="assets/js/feather.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="assets/js/jquery.slimscroll.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="assets/js/select2.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    </div>
+    <div class="sidebar-overlay" data-reff></div>
+    <script src="assets/js/jquery-3.7.1.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="assets/js/bootstrap.bundle.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="assets/js/feather.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="assets/js/jquery.slimscroll.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="assets/js/select2.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
 
-      <script src="assets/plugins/moment/moment.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="assets/js/bootstrap-datetimepicker.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="assets/js/app.js" type="f766d52cba414303a7e91423-text/javascript"></script>
-      <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-        data-cf-settings="f766d52cba414303a7e91423-|49" defer></script>
+    <script src="assets/plugins/moment/moment.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="assets/js/bootstrap-datetimepicker.min.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="assets/js/app.js" type="f766d52cba414303a7e91423-text/javascript"></script>
+    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+      data-cf-settings="f766d52cba414303a7e91423-|49" defer></script>
 
-      <script>
+    <script>
 
-        // document.getElementById('uploadForm').addEventListener('submit', function(e) {
-        //     e.preventDefault(); // Prevent form submission
-        //     var fileInput = document.getElementById('prescriptionUpload');
-        //     if (fileInput.files.length > 0) {
-        //         document.getElementById('submitButton').style.display = 'none'; // Hide the submit button
-        //         document.getElementById('generateResultButton').style.display = 'inline-block'; // Show the generate result button
-        //         document.getElementById('textareaContainer').style.display = 'block'; // Show the textarea
-        //     } else {
-        //         alert('Please upload a file.');
-        //     }
-        // });
-      </script>
+      // document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      //     e.preventDefault(); // Prevent form submission
+      //     var fileInput = document.getElementById('prescriptionUpload');
+      //     if (fileInput.files.length > 0) {
+      //         document.getElementById('submitButton').style.display = 'none'; // Hide the submit button
+      //         document.getElementById('generateResultButton').style.display = 'inline-block'; // Show the generate result button
+      //         document.getElementById('textareaContainer').style.display = 'block'; // Show the textarea
+      //     } else {
+      //         alert('Please upload a file.');
+      //     }
+      // });
+    </script>
 </body>
 
 </html>

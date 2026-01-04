@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Medical Prescription Parser</title>
+    <style>
+        :root {
+            --primary-color: #2e37a4;
+            /* Updated color */
+            --secondary-color: #2e37a4;
+            /* Unified color */
+            --background-start: #ffffff;
+            --background-end: #ffffff;
+            --text-color: #000000;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        @font-face {
+            font-family: 'Feather';
+            src: url('feather144f.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Feather', 'Inter', system-ui, -apple-system, sans-serif;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        .split-left {
+            flex: 1;
+            background-image: url('/assets/img/prescription-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        .split-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .split-left {
+                height: 300px;
+                min-height: auto;
+                flex: none;
+            }
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: #2e37a4;
+            /* Updated color */
+        }
+
+        p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 2px solid black;
+            /* Reverted to black */
+            border-radius: 12px;
+            padding: 1rem;
+            /* Reduced padding for height */
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: black;
+            /* Slightly darker or same */
+            background: rgba(85, 206, 99, 0.05);
+            /* #55ce63 with opacity */
+        }
+
+        .file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .btn {
+            background: #00d3c7;
+            /* Updated to green */
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(85, 206, 99, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            /* Fixed width for icon */
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(85, 206, 99, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Modal / Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 1000px;
+            /* Increased from 800px */
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #111827;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        /* Result Cards */
+        .medicine-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .medicine-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .medicine-name {
+            color: #2e37a4;
+            /* Updated color */
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            width: 120px;
+            color: #4b5563;
+        }
+
+        .detail-val {
+            color: #1f2937;
+            flex: 1;
+        }
+
+        /* Loading */
+        .loader {
+            display: none;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="split-left"></div>
+    <div class="split-right">
+        <h1 style="margin-top: 2rem;margin-bottom: 4rem;">Prescription Assist</h1>
+
+        <div style="width: 100%; max-width: 600px; padding: 1rem;">
+            <form id="uploadForm" style="display: flex; gap: 1rem; align-items: stretch; margin-bottom: 3rem;">
+                <div class="upload-area" id="dropArea"
+                    style="flex: 1; margin-bottom: 0; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.5);">
+                    <input type="file" id="fileInput" class="file-input" name="prescription" accept="image/*" required>
+                    <div id="fileLabel">
+                        <span style="font-size: 1.5rem;">📁</span>
+                        <span>Upload Prescription</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="analyzeBtn" title="Analyze">
+                    <!-- Upload Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </button>
+            </form>
+
+            <p style="text-align: center; color: #4b5563; font-style: italic; margin-bottom: 3rem; margin-top: -2rem;">
+                Get
+                an AI-powered analysis of your prescription to clearly understand medicines, their purpose, and proper
+                intake instructions.</p>
+
+            <div id="loader" class="loader" style="text-align: center; margin-bottom: 1rem;">Processing...</div>
+
+            <!-- History Section -->
+            <h3 style="border-bottom: 1px solid #ccc; padding-bottom: 0.5rem; margin-bottom: 1rem;">History</h3>
+            <div id="historyContainer" style="display: flex; flex-direction: column; gap: 1rem;">
+                <!-- History Items go here -->
+            </div>
+        </div>
+    </div> <!-- Close split-right -->
+
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Analysis Results</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="resultsContainer">
+                <!-- Dynamic Content Here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('fileLabel');
+        const form = document.getElementById('uploadForm');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const loader = document.getElementById('loader');
+        const modal = document.getElementById('modalOverlay');
+        const closeModal = document.getElementById('closeModal');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const historyContainer = document.getElementById('historyContainer');
+
+        // Load History on Start
+        renderHistory();
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileLabel.innerHTML = `<span style="color: green; font-weight: bold;">${e.target.files[0].name}</span>`;
+            }
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!fileInput.files[0]) return;
+
+            // UI Loading State
+            analyzeBtn.disabled = true;
+            analyzeBtn.innerHTML = '<div class="loader" style="display:block; margin:0; width:20px; height:20px; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>';
+            loader.style.display = 'block';
+
+            const formData = new FormData();
+            formData.append('prescription', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/prescription/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error('Analysis failed');
+
+                const data = await response.json();
+
+                // Save to History
+                addToHistory(data, fileInput.files[0].name);
+
+                displayResults(data);
+
+            } catch (error) {
+                alert('Error processing prescription: ' + error.message);
+                console.error(error);
+            } finally {
+                analyzeBtn.disabled = false;
+                // Restore Icon
+                analyzeBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>`;
+                loader.style.display = 'none';
+            }
+        });
+
+        function displayResults(data) {
+            resultsContainer.innerHTML = '';
+            const content = generateResultHTML(data);
+            resultsContainer.innerHTML = content;
+            modal.style.display = 'flex';
+        }
+
+        function generateResultHTML(data) {
+            if (data.error) {
+                return `<p style="color: red;">Error: ${data.error}</p>`;
+            }
+            if (Array.isArray(data) && data.length > 0) {
+                return data.map(item => `
+                    <div class="medicine-card">
+                        <span class="medicine-name">${item.medicine_name || 'Unknown Medicine'}</span>
+                        <div class="detail-row"><span class="detail-label">Purpose:</span><span class="detail-val">${item.purpose || 'N/A'}</span></div>
+                        <div class="detail-row"><span class="detail-label">Dosage:</span><span class="detail-val">${item.dosage || 'N/A'}</span></div>
+                        <div class="detail-row"><span class="detail-label">Schedule:</span><span class="detail-val">${item.time_schedule || 'N/A'}</span></div>
+                        <div class="detail-row"><span class="detail-label">Duration:</span><span class="detail-val">${item.duration_days || 'N/A'}</span></div>
+                    </div>
+                `).join('');
+            }
+            return '<p>No medicines detected or invalid format.</p>';
+        }
+
+        function addToHistory(data, fileName) {
+            const history = JSON.parse(localStorage.getItem('prescriptionHistory') || '[]');
+            const entry = {
+                id: Date.now(),
+                fileName: fileName,
+                date: new Date().toLocaleString(),
+                data: data
+            };
+            history.unshift(entry); // Add to top
+            if (history.length > 10) history.pop(); // Keep last 10
+            localStorage.setItem('prescriptionHistory', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('prescriptionHistory') || '[]');
+            historyContainer.innerHTML = '';
+
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p style="color: #888; text-align: center;">No history found</p>';
+                return;
+            }
+
+            history.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.style.background = 'rgba(255,255,255,0.6)';
+                itemDiv.style.padding = '1rem';
+                itemDiv.style.borderRadius = '8px';
+                itemDiv.style.border = '1px solid rgba(255,255,255,0.5)';
+                itemDiv.style.cursor = 'pointer';
+                itemDiv.style.display = 'flex';
+                itemDiv.style.justifyContent = 'space-between';
+                itemDiv.style.alignItems = 'center';
+                itemDiv.innerHTML = `
+                    <div>
+                        <strong>${item.fileName}</strong><br>
+                        <small>${item.date}</small>
+                    </div>
+                    <span style="color: var(--primary-color)">View &rarr;</span>
+                `;
+                itemDiv.onclick = () => {
+                    displayResults(item.data);
+                };
+                historyContainer.appendChild(itemDiv);
+            });
+        }
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

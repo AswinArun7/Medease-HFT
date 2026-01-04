@@ -115,6 +115,10 @@ router.get('/', function (req, res, next) {
 });
 
 
+router.get('/prescription-ai', function (req, res, next) {
+  res.sendFile('views/user/prescriptionai/prescriptionai.html', { root: __dirname + '/..' });
+});
+
 router.get('/prescriptionassist', async function (req, res, next) {
   try {
     console.log(req.session.user._id)

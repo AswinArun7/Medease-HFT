@@ -3,6 +3,8 @@ var router = express.Router()
 const prescriptionModel = require("../model/prescriptionModel")
 const { route } = require("./doctors")
 const upload = require("./multerMiddleware")
+const { spawn } = require("child_process")
+const path = require("path")
 
 // adding prescription image to prescription model
 router.post("/uploadPrescription", upload.single("prescription"), async (req, res) => {
@@ -12,7 +14,7 @@ router.post("/uploadPrescription", upload.single("prescription"), async (req, re
         }
         console.log(req.file)
         const prescription = new prescriptionModel({
-            image: req.file.filename, 
+            image: req.file.filename,
             userId: req.session.user._id,
 
         })
@@ -26,7 +28,7 @@ router.post("/uploadPrescription", upload.single("prescription"), async (req, re
 
 
 // getiing prescription by the user
-router.get("/getPrescriptionByUser",async (req, res) => {
+router.get("/getPrescriptionByUser", async (req, res) => {
     try {
         const prescription = await prescriptionModel.find({
             user: req.user._id,
@@ -40,7 +42,7 @@ router.get("/getPrescriptionByUser",async (req, res) => {
 
 
 //getting all users prescription by the doctor
-router.get("/getAllPrescription",async (req, res) => {
+router.get("/getAllPrescription", async (req, res) => {
     try {
         const prescriptions = await prescriptionModel.find()
         res.render("allPrescription", { prescriptions })
@@ -62,6 +64,73 @@ router.post("/doctorAddingComment/:id", async (req, res) => {
         res.json({ message: "comment added successfully" })
     } catch (error) {
         console.log(error)
+    }
+})
+
+// AI-powered prescription analysis endpoint
+router.post("/upload", upload.single("prescription"), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" })
+        }
+
+        console.log("File uploaded:", req.file.filename)
+
+        // Get the absolute path to the uploaded file
+        const imagePath = path.resolve(__dirname, "..", "public", "assets", "uploads", req.file.filename)
+
+        // Get the absolute path to the Python script
+        const scriptPath = path.resolve(__dirname, "..", "scripts", "analyze_prescription.py")
+
+        console.log("Executing Python script:", scriptPath)
+        console.log("Image path:", imagePath)
+
+        // Execute Python script
+        const pythonProcess = spawn("python", [scriptPath, imagePath])
+
+        let outputData = ""
+        let errorData = ""
+
+        // Collect output from Python script
+        pythonProcess.stdout.on("data", (data) => {
+            outputData += data.toString()
+        })
+
+        pythonProcess.stderr.on("data", (data) => {
+            errorData += data.toString()
+        })
+
+        pythonProcess.on("close", (code) => {
+            console.log("Python process exited with code:", code)
+
+            if (code !== 0) {
+                console.error("Python error:", errorData)
+                return res.status(500).json({
+                    error: "Failed to analyze prescription",
+                    details: errorData
+                })
+            }
+
+            try {
+                // Parse the JSON output from Python
+                const result = JSON.parse(outputData)
+                console.log("Analysis result:", result)
+
+                // Return the result to the frontend
+                res.json(result)
+            } catch (parseError) {
+                console.error("JSON parse error:", parseError)
+                console.error("Python output:", outputData)
+                res.status(500).json({
+                    error: "Failed to parse analysis results",
+                    raw_output: outputData
+                })
+            }
+        })
+
+    } catch (error) {
+        console.error("Upload error:", error)
+        res.status(500).json({ error: "Internal server error" })
     }
 })
 
