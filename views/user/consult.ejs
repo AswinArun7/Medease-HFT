@@ -290,8 +290,8 @@
                       <select class="form-control" name="hospital" id="hospitalSelect">
                         <option value="">Select Hospital</option>
                         <% for(hospital of hospitals ) { %>
-                          <option value="<%=hospital.username %>">
-                            <%=hospital.username %>
+                          <option value="<%=hospital.uniqueCode %>">
+                            <%=hospital.username %> (<%=hospital.uniqueCode %>)
                           </option>
                           <% } %>
 

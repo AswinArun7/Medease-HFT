@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medico-Legal Teleconsultation Record</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <!-- Libraries -->
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="reportstyle.css">
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <i class="ri-stethoscope-fill"></i>
+                <span>MediRecord</span>
+            </div>
+            <h1>Teleconsultation Entry</h1>
+        </header>
+
+        <!-- Form Section -->
+        <section id="formSection" class="form-card animate-fade-in">
+
+            <div class="form-header">
+                <h2>Consultation Details</h2>
+                <p>Fill in the details below to generate a medico-legal compliant record.</p>
+            </div>
+
+            <div class="grid-form">
+
+                <!-- Doctor / Clinic Info -->
+                <div class="group info-group">
+                    <h3><i class="ri-hospital-line"></i> Medical Facility & Doctor</h3>
+
+                    <div class="input-wrapper">
+                        <label for="hospital">Hospital / Clinic Name</label>
+                        <input type="text" id="hospital" placeholder="e.g. City General Hospital">
+                    </div>
+
+                    <div class="input-wrapper file-input-wrapper">
+                        <label for="logo">Hospital Logo</label>
+                        <div class="file-box">
+                            <input type="file" id="logo" accept="image/*">
+                            <span class="file-label"><i class="ri-upload-cloud-2-line"></i> Choose Image</span>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="doctor">Doctor Name</label>
+                        <input type="text" id="doctor" placeholder="Dr. Jane Doe">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="qual">Qualification(s)</label>
+                        <input type="text" id="qual" placeholder="MBBS, MD (General Medicine)">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="reg">Registration Number</label>
+                        <input type="text" id="reg" placeholder="MCI-123456">
+                    </div>
+                </div>
+
+                <!-- Patient / Call Info -->
+                <div class="group call-group">
+                    <h3><i class="ri-user-heart-line"></i> Patient & Interaction</h3>
+
+                    <div class="input-wrapper">
+                        <label for="patient">Patient Name / ID</label>
+                        <input type="text" id="patient" placeholder="John Smith / PID-992">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="jurisdiction">Jurisdiction</label>
+                        <select id="jurisdiction">
+                            <option>India – Telemedicine Practice Guidelines</option>
+                            <option>Other (Specify in remarks)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="mode">Mode of Consultation</label>
+                        <select id="mode">
+                            <option>Telephone</option>
+                            <option>Video Consultation</option>
+                            <option>Telemedicine Platform</option>
+                        </select>
+                    </div>
+
+                    <div class="row-2">
+                        <div class="input-wrapper">
+                            <label for="start">Call Start Time</label>
+                            <input type="datetime-local" id="start">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="end">Call End Time</label>
+                            <input type="datetime-local" id="end">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Data -->
+                <div class="group medical-group wide">
+                    <h3><i class="ri-clipboard-pulse-line"></i> Clinical Assessment</h3>
+
+                    <div class="input-wrapper">
+                        <label for="complaints">Clinical Complaints & History</label>
+                        <textarea id="complaints" placeholder="Patient complains of..."></textarea>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="diagnosis">Clinical Impression / Provisional Diagnosis</label>
+                        <textarea id="diagnosis" placeholder="Viral Fever..."></textarea>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="advice">Medical Advice / Treatment</label>
+                        <textarea id="advice" placeholder="Rx: Paracetamol 500mg..."></textarea>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="followup">Follow-up Plan</label>
+                        <textarea id="followup" placeholder="Review after 3 days..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Signature -->
+                <div class="group sign-group wide">
+                    <h3><i class="ri-pen-nib-line"></i> Authorization</h3>
+                    <div class="input-wrapper file-input-wrapper">
+                        <label for="sign">Doctor Digital Signature</label>
+                        <div class="file-box">
+                            <input type="file" id="sign" accept="image/*">
+                            <span class="file-label"><i class="ri-upload-cloud-2-line"></i> Upload Signature</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button onclick="generate()" class="btn-primary">
+                    <i class="ri-file-text-line"></i> Generate Report
+                </button>
+            </div>
+        </section>
+
+
+        <!-- REPORT PREVIEW (Hidden by default) -->
+        <section id="report" class="report-paper">
+
+            <header class="report-header">
+                <img id="rLogo" class="report-logo" alt="Logo">
+                <div class="header-text">
+                    <h2 id="rHospital"></h2>
+                    <h1>Medico-Legal Teleconsultation Record</h1>
+                </div>
+            </header>
+
+            <div class="report-body">
+                <p class="declaration">
+                    I, <b><span id="rDoctor"></span></b>, holding qualification(s) <b><span id="rQual"></span></b>,
+                    registered under <b><span id="rReg"></span></b>, hereby certify the following:
+                </p>
+
+                <div class="meta-box">
+                    <p>
+                        On <b><span id="rDate"></span></b>, I conducted a teleconsultation with <b><span
+                                id="rPatient"></span></b> via <b><span id="rMode"></span></b>.
+                    </p>
+                    <p>
+                        The interaction commenced at <b><span id="rStart"></span></b> and concluded at <b><span
+                                id="rEnd"></span></b>,
+                        with a total duration of <b><span id="rDuration"></span></b>.
+                    </p>
+                </div>
+
+                <div class="clinical-section">
+                    <h3>Clinical Summary</h3>
+                    <div class="data-block" id="rComplaints"></div>
+                </div>
+
+                <div class="clinical-section">
+                    <h3>Clinical Impression</h3>
+                    <div class="data-block" id="rDiagnosis"></div>
+                </div>
+
+                <div class="clinical-section">
+                    <h3>Medical Advice</h3>
+                    <div class="data-block" id="rAdvice"></div>
+                </div>
+
+                <div class="clinical-section">
+                    <h3>Follow-up & Escalation Plan</h3>
+                    <div class="data-block" id="rFollowup"></div>
+                </div>
+
+                <div class="legal-box">
+                    <h3>Legal Compliance Declaration</h3>
+                    <p>
+                        Explicit patient consent for teleconsultation was obtained prior to initiation.
+                        This consultation was conducted in accordance with applicable telemedicine laws
+                        and professional guidelines under the selected jurisdiction. The limitations of
+                        teleconsultation were explained. The patient was advised to seek immediate
+                        in-person or emergency care if clinical deterioration occurs.
+                    </p>
+                </div>
+
+                <div class="signature-block">
+                    <div class="sign-img-container">
+                        <img id="rSign" alt="Signature">
+                    </div>
+                    <div class="sign-text">
+                        <p><b><span id="rDoctor2"></span></b></p>
+                        <p>Reg No: <span id="rReg2"></span></p>
+                        <p class="timestamp">Generated: <span id="rTimestamp"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons for the report view (hide in print) -->
+            <div class="report-actions" data-html2canvas-ignore="true">
+                <button onclick="window.print()" class="btn-primary">
+                    <i class="ri-printer-line"></i> Print Report
+                </button>
+                <button onclick="editForm()" class="btn-secondary">
+                    <i class="ri-edit-line"></i> Edit Details
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="reportscript.js"></script>
+</body>
+
+</html>

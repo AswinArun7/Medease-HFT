@@ -143,20 +143,32 @@ router.post("/finddocter", authMiddleware, async function (req, res, next) {
     const { symptoms, hospital, specialty } = req.body
     let doctors
 
-    if (hospital && specialty) {
+    // If hospital uniqueCode is provided, find the hospital name first
+    let hospitalName = null
+    if (hospital) {
+      const hospitalDoc = await hospitalModel.findOne({ uniqueCode: hospital })
+      if (hospitalDoc) {
+        hospitalName = hospitalDoc.username
+      }
+    }
+
+    if (hospitalName && specialty) {
       doctors = await doctorModel.find({
         department: specialty,
-        hospital: hospital,
+        hospital: hospitalName,
       })
-    } else if (hospital) {
-      doctors = await doctorModel.find({ hospital: hospital })
+    } else if (hospitalName) {
+      doctors = await doctorModel.find({ hospital: hospitalName })
     } else if (specialty) {
       doctors = await doctorModel.find({ department: specialty })
+    } else {
+      doctors = []
     }
 
     res.render("user/finddocter", { doctors })
   } catch (error) {
     console.log(error)
+    res.render("user/finddocter", { doctors: [] })
   }
 })
 

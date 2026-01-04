@@ -1,0 +1,377 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #64748b;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --focus-ring: rgba(37, 99, 235, 0.2);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-area {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.app-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Form Card */
+.form-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+.form-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-family: var(--font-heading);
+    color: var(--text-main);
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.form-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Grid Layout */
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .grid-form {
+        grid-template-columns: 1fr 1fr;
+    }
+    .wide {
+        grid-column: span 2;
+    }
+    .row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+.group h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-wrapper {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    background: #fff;
+    transition: all 0.2s;
+    color: var(--text-main);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* File Input */
+.file-box {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-box input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #f1f5f9;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px dashed #cbd5e1;
+    color: var(--secondary);
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.file-box:hover .file-label {
+    background: #e2e8f0;
+    border-color: var(--secondary);
+    color: var(--text-main);
+}
+
+/* Buttons */
+.actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    font-family: var(--font-body);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.4);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    margin-left: 1rem;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+    border-color: var(--secondary);
+}
+
+/* Animation */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= REPORT VIEW ================= */
+#report {
+    display: none; /* Hidden by default */
+    background: white;
+    padding: 40px; /* Internal padding for PDF */
+    max-width: 800px;
+    margin: 2rem auto;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    font-family: 'Times New Roman', serif; /* Legal standard */
+}
+
+/* Print Specific Report Styles */
+.report-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.report-logo {
+    height: 80px;
+    margin-right: 20px;
+    object-fit: contain;
+}
+
+.header-text {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.header-text h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.header-text h1 {
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.report-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.meta-box {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.clinical-section {
+    margin-bottom: 20px;
+}
+
+.clinical-section h3 {
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.data-block {
+    min-height: 40px;
+    white-space: pre-wrap; /* Preserve line breaks from textarea */
+    font-size: 14px;
+}
+
+.legal-box {
+    margin-top: 30px;
+    font-size: 12px;
+    font-style: italic;
+    color: #555;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.signature-block {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.sign-img-container img {
+    height: 60px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.sign-text {
+    text-align: right;
+    font-size: 14px;
+}
+
+.timestamp {
+    font-size: 10px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.report-actions {
+    margin-top: 40px;
+    border-top: 2px dashed #eee;
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* Print Overrides */
+@media print {
+    body { background: white; }
+    .app-header, .form-card, .report-actions { display: none !important; }
+    #report { 
+        display: block !important; 
+        box-shadow: none; 
+        border: none; 
+        margin: 0; 
+        width: 100%;
+    }
+}
