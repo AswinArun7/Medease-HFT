@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png" />
+    <title>Doctor Schedule</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/datatables/datatables.min.css" />
+    <link rel="stylesheet" href="/assets/css/feather.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <%- include('../hospital/placeholder') %>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">Main</li>
+                        <li>
+                            <a href="/hospital/Dashboard"><span class="menu-side"><img src="/assets/img/icons/menu-icon-01.svg"
+                                        alt /></span>
+                                <span> Dashboard </span></a>
+                        </li>
+                        <li>
+                            <a href="/hospital/getDoctors"><span class="menu-side"><img src="/assets/img/icons/menu-icon-02.svg"
+                                        alt /></span>
+                                <span> Doctors </span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="/hospital/getPatients"><span class="menu-side"><img src="/assets/img/icons/menu-icon-03.svg"
+                                        alt /></span>
+                                <span>Patients </span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="/hospital/getAppointments"><span class="menu-side"><img src="/assets/img/icons/menu-icon-04.svg"
+                                        alt /></span>
+                                <span> Appointments </span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="/hospital/getSchedule"><span class="menu-side"><img src="/assets/img/icons/menu-icon-05.svg"
+                                        alt /></span>
+                                <span> Doctor Schedule </span></a>
+                        </li>
+                        <li>
+                            <a href="/hospital/getAddDept"><span class="menu-side"><img src="/assets/img/icons/menu-icon-06.svg"
+                                        alt /></span>
+                                <span> Specialities </span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/hospital/Dashboard">Dashboard </a></li>
+                                <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+                                <li class="breadcrumb-item active">Doctor Schedule</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table show-entire">
+                            <div class="card-body">
+                                <div class="page-table-header mb-2">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <div class="doctor-table-blk">
+                                                <h3>Doctor Schedule</h3>
+                                                <div class="doctor-search-blk">
+                                                    <div class="add-group">
+                                                        <a href="javascript:;" class="btn btn-primary add-pluss ms-2">
+                                                            <img src="/assets/img/icons/plus.svg" alt />
+                                                        </a>
+                                                        <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2">
+                                                            <img src="/assets/img/icons/re-fresh.svg" alt />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table border-0 custom-table comman-table datatable mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Doctor Name</th>
+                                                <th>Speciality</th>
+                                                <th>Available Days</th>
+                                                <th>Timings</th>
+                                                <th>Experience</th>
+                                                <th>City</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (doctors && doctors.length > 0) { %>
+                                                <% for(doctor of doctors) { %>
+                                                <tr>
+                                                    <td class="profile-image">
+                                                        <a href="javascript:;">
+                                                            <img width="28" height="28" src="https://tse1.mm.bing.net/th?id=OIP.r-0yt7jCyKcesBQv51ZqHwHaHa&pid=Api&P=0&h=180"
+                                                                class="rounded-circle m-r-5" alt />
+                                                            Dr. <%= doctor.firstname %> <%= doctor.lastname %>
+                                                        </a>
+                                                    </td>
+                                                    <td><%= doctor.department %></td>
+                                                    <td>
+                                                        <span class="badge bg-info">Mon - Fri</span>
+                                                    </td>
+                                                    <td>
+                                                        <% if (doctor.timings) { %>
+                                                            <i class="fa fa-clock"></i> <%= doctor.timings %>
+                                                        <% } else { %>
+                                                            <i class="fa fa-clock"></i> 9:00 AM - 5:00 PM
+                                                        <% } %>
+                                                    </td>
+                                                    <td><%= doctor.experience %> years</td>
+                                                    <td><%= doctor.city %></td>
+                                                    <td>
+                                                        <span class="badge bg-success">Available</span>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="7" class="text-center text-muted">No doctors found</td>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/feather.min.js"></script>
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables/datatables.min.js"></script>
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "medece",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.10.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.18.0",
+    "geoip-lite": "^1.4.10",
+    "http-errors": "~1.6.3",
+    "mongodb": "^7.0.0",
+    "mongoose": "^8.3.3",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "request-ip": "^3.3.0",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
