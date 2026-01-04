@@ -279,7 +279,7 @@
                                             <tbody>
                                                 <% if (appointments && appointments.length > 0) { %>
                                                     <% appointments.slice(0, 5).forEach(appointment => { %>
-                                                        <tr>
+                                                        <tr style="cursor: pointer;" onclick="window.location.href='/doctor/appointment-details/<%= appointment._id %>'">
                                                             <td class="table-image appoint-doctor">
                                                                 <div>
                                                                     <h2 style="margin-bottom: 8px; font-size: 16px; font-weight: 600; color: #333;"><%= appointment.firstname %> <%= appointment.lastname %></h2>

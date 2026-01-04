@@ -441,33 +441,90 @@
                 <div id="myAppointmentsSection" style="display: none;">
                   <div class="row">
                     <div class="col-12">
-                      <h5 style="margin-bottom: 20px; color: #333;">Your Appointments</h5>
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 style="margin-bottom: 0; color: #333;">Your Appointments</h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="window.location.reload()">
+                          <i class="fas fa-sync-alt me-1"></i> Refresh
+                        </button>
+                      </div>
                       <% if (typeof appointments !== 'undefined' && appointments && appointments.length > 0) { %>
                         <div class="row">
                           <% for(let appointment of appointments) { %>
+                            <% 
+                              let statusBadge = {
+                                'pending': { class: 'warning', text: 'Waiting', icon: 'clock' },
+                                'accepted': { class: 'success', text: 'Accepted', icon: 'check-circle' },
+                                'rescheduled': { class: 'info', text: 'Rescheduled', icon: 'calendar-alt' },
+                                'completed': { class: 'secondary', text: 'Completed', icon: 'check' },
+                                'cancelled': { class: 'danger', text: 'Cancelled', icon: 'times-circle' }
+                              }[appointment.status || 'pending'];
+                            %>
                             <div class="col-md-6 col-lg-4 mb-3">
                               <div class="card" style="border-radius: 10px; border: 2px solid #e8e8e8; transition: all 0.3s;">
                                 <div class="card-body">
-                                  <div class="d-flex align-items-center mb-3">
-                                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin-right: 12px;">
-                                      <i class="fas fa-calendar-check" style="color: white; font-size: 18px;"></i>
+                                  <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="d-flex align-items-center">
+                                      <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                        <i class="fas fa-calendar-check" style="color: white; font-size: 18px;"></i>
+                                      </div>
+                                      <div>
+                                        <h6 class="mb-0"><%= appointment.firstname %> <%= appointment.lastname %></h6>
+                                        <small class="text-muted"><%= appointment.email %></small>
+                                      </div>
                                     </div>
-                                    <div>
-                                      <h6 class="mb-0"><%= appointment.firstname %> <%= appointment.lastname %></h6>
-                                      <small class="text-muted"><%= appointment.email %></small>
-                                    </div>
+                                    <span class="badge bg-<%= statusBadge.class %>">
+                                      <i class="fas fa-<%= statusBadge.icon %> me-1"></i><%= statusBadge.text %>
+                                    </span>
                                   </div>
                                   <hr>
                                   <div class="appointment-details">
                                     <p class="mb-2"><strong><i class="fas fa-user-md me-2"></i>Doctor:</strong> Dr. <%= appointment.doctor %></p>
                                     <p class="mb-2"><strong><i class="fas fa-hospital me-2"></i>Hospital:</strong> <%= appointment.Hospital || 'N/A' %></p>
-                                    <p class="mb-2"><strong><i class="fas fa-calendar me-2"></i>Date:</strong> <%= appointment.date %></p>
-                                    <p class="mb-2"><strong><i class="fas fa-stethoscope me-2"></i>Specialty:</strong> <%= appointment.Symptom || 'N/A' %></p>
+                                    
+                                    <% if (appointment.status === 'rescheduled' && appointment.rescheduledDate) { %>
+                                      <p class="mb-2">
+                                        <strong><i class="fas fa-calendar me-2"></i>Original Date:</strong> 
+                                        <span class="text-decoration-line-through text-muted"><%= appointment.date %></span>
+                                      </p>
+                                      <p class="mb-2">
+                                        <strong><i class="fas fa-calendar-check me-2 text-info"></i>New Date:</strong> 
+                                        <span class="text-info fw-bold"><%= appointment.rescheduledDate %></span>
+                                      </p>
+                                    <% } else { %>
+                                      <p class="mb-2"><strong><i class="fas fa-calendar me-2"></i>Date:</strong> <%= appointment.date %></p>
+                                    <% } %>
+                                    
+                                    <p class="mb-2"><strong><i class="fas fa-stethoscope me-2"></i>Symptoms:</strong> <%= appointment.Symptom || 'N/A' %></p>
                                     <p class="mb-2"><strong><i class="fas fa-video me-2"></i>Mode:</strong> <span class="badge <%= appointment.mode === 'online' ? 'bg-success' : 'bg-primary' %>"><%= appointment.mode || 'offline' %></span></p>
                                   </div>
-                                  <div class="mt-3">
-                                    <button class="btn btn-sm btn-outline-primary w-100">View Details</button>
-                                  </div>
+                                  
+                                  <% if (appointment.status === 'accepted' && appointment.videoCallLink && appointment.mode === 'online') { %>
+                                    <div class="mt-3">
+                                      <a href="<%= appointment.videoCallLink %>" target="_blank" class="btn btn-success btn-sm w-100">
+                                        <i class="fas fa-video me-1"></i> Join Video Call
+                                      </a>
+                                    </div>
+                                  <% } else if (appointment.status === 'pending') { %>
+                                    <div class="mt-3">
+                                      <div class="alert alert-warning p-2 mb-0" style="font-size: 12px;">
+                                        <i class="fas fa-hourglass-half me-1"></i> Waiting for doctor's response
+                                      </div>
+                                    </div>
+                                  <% } else if (appointment.status === 'rescheduled') { %>
+                                    <div class="mt-3">
+                                      <div class="alert alert-info p-2 mb-0" style="font-size: 12px;">
+                                        <i class="fas fa-info-circle me-1"></i> Appointment rescheduled by doctor
+                                      </div>
+                                    </div>
+                                  <% } %>
+                                  
+                                  <% if (appointment.status === 'completed') { %>
+                                    <div class="mt-3">
+                                      <button onclick="viewReports('<%= appointment._id %>')" class="btn btn-info btn-sm w-100">
+                                        <i class="fas fa-file-medical me-1"></i> View Reports
+                                      </button>
+                                    </div>
+                                  <% } %>
                                 </div>
                               </div>
                             </div>
@@ -989,6 +1046,84 @@
           myBtn.className = 'btn btn-primary';
           bookSection.style.display = 'none';
           mySection.style.display = 'block';
+        }
+      }
+      
+      // View reports for an appointment
+      async function viewReports(appointmentId) {
+        try {
+          const response = await fetch(`/appointment-reports/${appointmentId}`);
+          const data = await response.json();
+          
+          if (data.success && data.reports.length > 0) {
+            // Create modal to display reports
+            let reportsHtml = `
+              <div class="modal fade" id="reportsModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><i class="fas fa-file-medical me-2"></i>Medical Reports</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+            `;
+            
+            data.reports.forEach((report, index) => {
+              const reportDate = new Date(report.createdAt).toLocaleString('en-IN');
+              reportsHtml += `
+                <div class="card mb-3">
+                  <div class="card-header bg-primary text-white">
+                    <strong>Report #${index + 1}</strong> - ${reportDate}
+                  </div>
+                  <div class="card-body">
+                    <h6><i class="fas fa-hospital me-2"></i>${report.hospital}</h6>
+                    <p><strong>Doctor:</strong> ${report.doctorName}</p>
+                    <p><strong>Qualification:</strong> ${report.qualification}</p>
+                    <p><strong>Registration:</strong> ${report.registrationNumber}</p>
+                    <hr>
+                    <h6 class="text-primary">Clinical Complaints</h6>
+                    <p>${report.clinicalComplaints}</p>
+                    <h6 class="text-primary">Clinical Impression</h6>
+                    <p>${report.clinicalImpression}</p>
+                    <h6 class="text-primary">Medical Advice</h6>
+                    <p>${report.medicalAdvice}</p>
+                    <h6 class="text-primary">Follow-up Plan</h6>
+                    <p>${report.followupPlan}</p>
+                    ${report.consultationMode ? `<p><strong>Consultation Mode:</strong> ${report.consultationMode}</p>` : ''}
+                    ${report.duration ? `<p><strong>Duration:</strong> ${report.duration}</p>` : ''}
+                  </div>
+                </div>
+              `;
+            });
+            
+            reportsHtml += `
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('reportsModal');
+            if (existingModal) {
+              existingModal.remove();
+            }
+            
+            // Add modal to page
+            document.body.insertAdjacentHTML('beforeend', reportsHtml);
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('reportsModal'));
+            modal.show();
+          } else {
+            alert('No reports available for this appointment');
+          }
+        } catch (error) {
+          console.error('Error fetching reports:', error);
+          alert('Failed to load reports. Please try again.');
         }
       }
     </script>

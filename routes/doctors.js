@@ -6,6 +6,7 @@ const doctorModel = require("../model/doctorModel")
 const appointmentModel = require("../model/appointmentModel")
 const prescriptionModel = require("../model/prescriptionModel")
 const hostpitalModel = require("../model/hostpitalModel")
+const reportModel = require("../model/reportModel")
 
 router.use(
     session({
@@ -190,6 +191,156 @@ router.get("/appointment-List", async function (req, res, next) {
     } catch (error) {
         console.error('Error fetching doctor appointments:', error)
         res.render("doctor/appointment-list", { appointments: [], doctor: { firstname: req.session.doctorName || '' } })
+    }
+})
+
+// Get appointment details
+router.get("/appointment-details/:id", async function (req, res, next) {
+    try {
+        if (!req.session.doctorId) {
+            return res.redirect("/doctor/login")
+        }
+        
+        const appointment = await appointmentModel.findById(req.params.id)
+        if (!appointment) {
+            return res.redirect("/doctor/profile")
+        }
+        
+        const doctor = await doctorModel.findById(req.session.doctorId)
+        res.render("doctor/appointment-details", { appointment, doctor })
+    } catch (error) {
+        console.error('Error fetching appointment details:', error)
+        res.redirect("/doctor/profile")
+    }
+})
+
+// Update appointment (reschedule)
+router.post("/appointment-reschedule/:id", async function (req, res, next) {
+    try {
+        if (!req.session.doctorId) {
+            return res.redirect("/doctor/login")
+        }
+        
+        const { newDate } = req.body
+        await appointmentModel.findByIdAndUpdate(req.params.id, { 
+            rescheduledDate: newDate,
+            status: 'rescheduled',
+            respondedAt: new Date()
+        })
+        
+        res.redirect('/doctor/profile?success=rescheduled')
+    } catch (error) {
+        console.error('Error rescheduling appointment:', error)
+        res.redirect('/doctor/profile?error=reschedule_failed')
+    }
+})
+
+// Video consultation page
+router.get("/video-consultation", async function (req, res, next) {
+    try {
+        if (!req.session.doctorId) {
+            return res.redirect("/doctor/login")
+        }
+        
+        const { appointmentId, patientName, patientEmail } = req.query
+        const doctor = await doctorModel.findById(req.session.doctorId)
+        const roomId = `apt${appointmentId}`
+        
+        // Update appointment status and add video call link
+        const videoCallLink = `https://vdo.ninja/?room=${roomId}&view=${roomId}&label=${encodeURIComponent(patientName)}`
+        await appointmentModel.findByIdAndUpdate(appointmentId, {
+            status: 'accepted',
+            videoCallLink: videoCallLink,
+            respondedAt: new Date()
+        })
+        
+        res.render("doctor/video-consultation", { 
+            appointmentId, 
+            patientName, 
+            patientEmail,
+            doctor,
+            roomId
+        })
+    } catch (error) {
+        console.error('Error loading video consultation:', error)
+        res.redirect("/doctor/profile")
+    }
+})
+
+// Report generation page
+router.get("/report-generation", async function (req, res, next) {
+    try {
+        if (!req.session.doctorId) {
+            return res.redirect("/doctor/login")
+        }
+        
+        const { appointmentId } = req.query
+        const doctor = await doctorModel.findById(req.session.doctorId)
+        const appointment = appointmentId ? await appointmentModel.findById(appointmentId) : null
+        
+        res.render("doctor/doctorreport/reportgeneration", { 
+            doctor,
+            appointment
+        })
+    } catch (error) {
+        console.error('Error loading report generation:', error)
+        res.redirect("/doctor/profile")
+    }
+})
+
+// Save report to database
+router.post("/save-report", async function (req, res, next) {
+    try {
+        if (!req.session.doctorId) {
+            return res.status(401).json({ error: 'Unauthorized' })
+        }
+        
+        const reportData = {
+            appointmentId: req.body.appointmentId,
+            doctorId: req.session.doctorId,
+            patientEmail: req.body.patientEmail,
+            hospital: req.body.hospital,
+            logoUrl: req.body.logoUrl,
+            doctorName: req.body.doctorName,
+            qualification: req.body.qualification,
+            registrationNumber: req.body.registrationNumber,
+            signatureUrl: req.body.signatureUrl,
+            jurisdiction: req.body.jurisdiction,
+            consultationMode: req.body.consultationMode,
+            callStartTime: req.body.callStartTime,
+            callEndTime: req.body.callEndTime,
+            duration: req.body.duration,
+            clinicalComplaints: req.body.clinicalComplaints,
+            clinicalImpression: req.body.clinicalImpression,
+            medicalAdvice: req.body.medicalAdvice,
+            followupPlan: req.body.followupPlan
+        }
+        
+        const report = new reportModel(reportData)
+        await report.save()
+        
+        // Update appointment status to completed
+        await appointmentModel.findByIdAndUpdate(req.body.appointmentId, { status: 'completed' })
+        
+        res.json({ success: true, message: 'Report saved successfully' })
+    } catch (error) {
+        console.error('Error saving report:', error)
+        res.status(500).json({ error: 'Failed to save report' })
+    }
+})
+
+// Get reports for an appointment
+router.get("/appointment-reports/:appointmentId", async function (req, res, next) {
+    try {
+        if (!req.session.doctorId) {
+            return res.redirect("/doctor/login")
+        }
+        
+        const reports = await reportModel.find({ appointmentId: req.params.appointmentId })
+        res.json({ reports })
+    } catch (error) {
+        console.error('Error fetching reports:', error)
+        res.status(500).json({ error: 'Failed to fetch reports' })
     }
 })
 //list all prescription

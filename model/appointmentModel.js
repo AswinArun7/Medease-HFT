@@ -13,5 +13,9 @@ const Schema = new mongoose.Schema({
     Hospital: String,
     Symptom: String,
     mode: String,
-})
+    status: { type: String, default: 'pending', enum: ['pending', 'accepted', 'rescheduled', 'completed', 'cancelled'] },
+    videoCallLink: String,
+    rescheduledDate: String,
+    respondedAt: Date
+}, { timestamps: true })
 module.exports = mongoose.model("appointment", Schema)

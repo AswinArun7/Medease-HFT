@@ -7,6 +7,7 @@ const prescriptionModel = require('../model/prescriptionModel');
 const doctorModel = require("../model/doctorModel")
 const appointmentModel = require("../model/appointmentModel")
 const hospitalModel = require("../model/hostpitalModel")
+const reportModel = require("../model/reportModel")
 const requestIp = require('request-ip');
 const geoip = require('geoip-lite');
 //implementing session
@@ -231,6 +232,18 @@ router.get('/appointment', authMiddleware, async (req, res) => {
     res.render('user/appointment', { doctors: [], hospitals: [], appointments: [], user: req.session.user })
   }
 })
+
+// Get reports for a specific appointment
+router.get('/appointment-reports/:appointmentId', authMiddleware, async function (req, res, next) {
+  try {
+    const reports = await reportModel.find({ appointmentId: req.params.appointmentId }).sort({ createdAt: -1 })
+    res.json({ success: true, reports })
+  } catch (error) {
+    console.error('Error fetching reports:', error)
+    res.status(500).json({ success: false, error: 'Failed to fetch reports' })
+  }
+})
+
 //booking an appointment
 
 router.post("/book-appointment", async (req, res) => {

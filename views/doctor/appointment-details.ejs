@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <title>Appointment Details - Medease</title>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/feather.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    
+    <style>
+        .appointment-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .patient-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .patient-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        .patient-avatar i {
+            font-size: 40px;
+            color: white;
+        }
+        .info-row {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #333;
+            width: 150px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: #666;
+            flex-grow: 1;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-video-call {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .btn-video-call:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        .btn-reschedule {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .btn-reschedule:hover {
+            background: #f8f9ff;
+            transform: translateY(-2px);
+        }
+        .reschedule-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+        .mode-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3>Appointment Details</h3>
+                            <a href="/doctor/profile" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8 mx-auto">
+                        <div class="appointment-card">
+                            <div class="patient-info">
+                                <div class="patient-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h2 style="margin-bottom: 5px; font-size: 24px;"><%= appointment.firstname %> <%= appointment.lastname %></h2>
+                                    <p style="margin-bottom: 5px; color: #666;">
+                                        <i class="fas fa-envelope"></i> <%= appointment.email %>
+                                    </p>
+                                    <p style="margin: 0; color: #666;">
+                                        <i class="fas fa-phone"></i> <%= appointment.mobile %>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="appointment-details">
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fas fa-calendar-alt"></i> Date
+                                    </div>
+                                    <div class="info-value">
+                                        <%= appointment.date %>
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fas fa-hospital"></i> Hospital
+                                    </div>
+                                    <div class="info-value">
+                                        <%= appointment.Hospital || 'Not specified' %>
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fas fa-venus-mars"></i> Gender
+                                    </div>
+                                    <div class="info-value" style="text-transform: capitalize;">
+                                        <%= appointment.gender %>
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fas fa-map-marker-alt"></i> Address
+                                    </div>
+                                    <div class="info-value">
+                                        <%= appointment.address %>
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fas fa-notes-medical"></i> Symptoms
+                                    </div>
+                                    <div class="info-value">
+                                        <%= appointment.Symptom || 'Not specified' %>
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fas fa-laptop-medical"></i> Mode
+                                    </div>
+                                    <div class="info-value">
+                                        <span class="mode-badge bg-<%= appointment.mode === 'online' ? 'success' : 'primary' %>" style="text-transform: capitalize;">
+                                            <%= appointment.mode %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <% if (appointment.mode === 'online') { %>
+                                    <button class="btn-video-call" onclick="startVideoCall()">
+                                        <i class="fas fa-video"></i>
+                                        Start Video Call
+                                    </button>
+                                <% } %>
+                                <button class="btn-reschedule" onclick="toggleReschedule()">
+                                    <i class="fas fa-calendar-plus"></i>
+                                    Reschedule
+                                </button>
+                                <button class="btn-report" onclick="window.location.href='/doctor/report-generation?appointmentId=<%= appointment._id %>'" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s;">
+                                    <i class="fas fa-file-medical"></i>
+                                    Create Report
+                                </button>
+                            </div>
+
+                            <div class="reschedule-form" id="rescheduleForm">
+                                <form action="/doctor/appointment-reschedule/<%= appointment._id %>" method="POST">
+                                    <div class="form-group">
+                                        <label for="newDate" style="font-weight: 600; margin-bottom: 10px;">Select New Date</label>
+                                        <input type="date" class="form-control" id="newDate" name="newDate" required style="padding: 12px; border-radius: 8px;">
+                                    </div>
+                                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                        <button type="submit" class="btn btn-primary" style="flex: 1;">Confirm Reschedule</button>
+                                        <button type="button" class="btn btn-secondary" onclick="toggleReschedule()" style="flex: 1;">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/feather.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    
+    <script>
+        function toggleReschedule() {
+            const form = document.getElementById('rescheduleForm');
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+
+        function startVideoCall() {
+            // Redirect to custom video call page with appointment details
+            const appointmentId = '<%= appointment._id %>';
+            const patientName = '<%= appointment.firstname %> <%= appointment.lastname %>';
+            const patientEmail = '<%= appointment.email %>';
+            
+            // Construct URL with parameters
+            const videoCallUrl = `/doctor/video-consultation?appointmentId=${appointmentId}&patientName=${encodeURIComponent(patientName)}&patientEmail=${encodeURIComponent(patientEmail)}`;
+            
+            // Navigate to video call page
+            window.location.href = videoCallUrl;
+        }
+    </script>
+    
+    <%- include('../partials/message-banner') %>
+</body>
+</html>
