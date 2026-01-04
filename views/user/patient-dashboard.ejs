@@ -1,544 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="/assets/img/favicon.png"
-    />
-    <title>patiant - Medical & Hospital - Bootstrap 5 Admin Template</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/assets/css/bootstrap.min.css"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png" />
+  <title>patiant - Medical & Hospital - Bootstrap 5 Admin Template</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <link
-      rel="stylesheet"
-      href="/assets/plugins/fontawesome/css/fontawesome.min.css"
-    />
-    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
+  <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
 
-    <link
-      rel="stylesheet"
-      href="/assets/plugins/simple-calendar/simple-calendar.css"
-    />
+  <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
 
-    <link
-      rel="stylesheet"
-      href="/assets/plugins/datatables/datatables.min.css"
-    />
+  <link rel="stylesheet" href="/assets/plugins/simple-calendar/simple-calendar.css" />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/assets/plugins/slick/slick.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/assets/plugins/slick/slick-theme.css"
-    />
+  <link rel="stylesheet" href="/assets/plugins/datatables/datatables.min.css" />
 
-    <link rel="stylesheet" href="/assets/css/feather.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/plugins/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/plugins/slick/slick-theme.css" />
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
-    <style>
-      .sidebar-inner {
-        height: 100%;
-        overflow-y: auto;
-      }
+  <link rel="stylesheet" href="/assets/css/feather.css" />
 
-      .sidebar-menu {
-        padding: 0;
-      }
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+  <style>
+    .sidebar-inner {
+      height: 100%;
+      overflow-y: auto;
+    }
 
-      #sidebarCarousel {
-        height: 650px;
-      }
+    .sidebar-menu {
+      padding: 0;
+    }
 
-      #sidebarCarousel .carousel-inner {
-        height: 100%;
-      }
+    #sidebarCarousel {
+      height: 650px;
+    }
 
-      #sidebarCarousel .carousel-item {
-        height: 100%;
-      }
+    #sidebarCarousel .carousel-inner {
+      height: 100%;
+    }
 
-      #sidebarCarousel .carousel-item img {
-        height: 100%;
-        width: auto;
-      }
-      .carousel-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  
-}
+    #sidebarCarousel .carousel-item {
+      height: 100%;
+    }
 
-.carousel-caption h5 {
-  margin-bottom: 0;
-  font-weight: bold;
-}
-    </style>
-    <!-- CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
+    #sidebarCarousel .carousel-item img {
+      height: 100%;
+      width: auto;
+    }
 
-    <!-- JavaScript -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSGFpoO/ufreqqF6MVu4JdG7PhIxZlW8sSJv43gkdSHlua9DmM/"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-      integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div class="main-wrapper">
-      <div class="header">
-        <div class="header-left">
-          <a href="/" class="logo">
-            <img src="/assets/img/logo.png" width="35" height="35" alt />
-            <span>Medease</span>
-          </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"
-          >
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+
+    }
+
+    .carousel-caption h5 {
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+  <!-- JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSGFpoO/ufreqqF6MVu4JdG7PhIxZlW8sSJv43gkdSHlua9DmM/"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+    integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="main-wrapper">
+    <div class="header">
+      <div class="header-left">
+        <a href="/" class="logo">
+          <img src="/assets/img/logo.png" width="35" height="35" alt />
+          <span>Medease</span>
         </a>
-        <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"
-          ><img src="/assets/img/icons/bar-icon.svg" alt
-        /></a>
+      </div>
+      <a id="toggle_btn" href="javascript:void(0);">
+      </a>
+      <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="/assets/img/icons/bar-icon.svg"
+          alt /></a>
 
-        <div class="top-nav-search mob-view">
-            <form>
-                <select class="form-control" onchange="searchCity(this.value)">
-                    <option value="Null">Select another city.</option>
-                    <option value="thiruvananthapuram">Thiruvananthapuram</option>
-                            <option value="kochi">Kochi</option>
-                            <option value="kozhikode">Kozhikode</option>
-                            <option value="thrissur">Thrissur</option>
-                            <option value="kollam">Kollam</option>
-                            <option value="palakkad">Palakkad</option>
-                            <option value="malappuram">Malappuram</option>
-                            <option value="kannur">Kannur</option>
-                            <option value="alappuzha">Alappuzha</option>
-                            <option value="kottayam">Kottayam</option>
-                            <option value="pathanamthitta">Pathanamthitta</option>
-                            <option value="idukki">Idukki</option>
-                            <option value="wayanad">Wayanad</option>
-                            <option value="kasaragod">Kasaragod</option>
-                            <option value="ernakulam">Ernakulam</option>
-                            <option value="kothamangalam">Kothamangalam</option>
-                            <option value="muvattupuzha">Muvattupuzha</option>
-                            <option value="north paravur">North Paravur</option>
-                            <option value="aluva">Aluva</option>
-                            <option value="angamaly">Angamaly</option>
-                            <option value="aluva">Aluva</option>
-                            <option value="angamaly">Angamaly</option>
-                            <option value="arakuzha">Arakuzha</option>
-                            <option value="choondy">Choondy</option>
-                            <option value="eernakulam">Eernakulam</option>
-                            <option value="edakkattuvayal">Edakkattuvayal</option>
-                            <option value="edathala">Edathala</option>
-                            <option value="elavoor">Elavoor</option>
-                            <option value="irumbanam">Irumbanam</option>
-                            <option value="kanjoor">Kanjoor</option>
-                            <option value="karukutty">Karukutty</option>
-                            <option value="keezhmad">Keezhmad</option>
-                            <option value="kizhakkambalam">Kizhakkambalam</option>
-                            <option value="kolenchery">Kolenchery</option>
-                            <option value="koratty">Koratty</option>
-                            <option value="kothamangalam">Kothamangalam</option>
-                            <option value="kunnathunad">Kunnathunad</option>
-                            <option value="malayattoor-nadayar">Malayattoor-Nadayar</option>
-                            <option value="maneed">Maneed</option>
-                            <option value="marampally">Marampally</option>
-                            <option value="marady">Marady</option>
-                            <option value="marakkaravazhy">Marakkaravazhy</option>
-                            <option value="maruthayoor">Maruthayoor</option>
-                            <option value="mulanthuruthy">Mulanthuruthy</option>
-                            <option value="muvattupuzha">Muvattupuzha</option>
-                            <option value="nayarambalam">Nayarambalam</option>
-                            <option value="north-paravur">North Paravur</option>
-                            <option value="palissery">Palissery</option>
-                            <option value="panampilly-nagar">Panampilly Nagar</option>
-                            <option value="parakkadavu">Parakkadavu</option>
-                            <option value="paravur">Paravur</option>
-                            <option value="payipra">Payipra</option>
-                            <option value="payyappilly">Payyappilly</option>
-                            <option value="perumbavoor">Perumbavoor</option>
-                            <option value="perumthuruthy">Perumthuruthy</option>
-                            <option value="pindimana">Pindimana</option>
-                            <option value="piravom">Piravom</option>
-                            <option value="pookkattupady">Pookkattupady</option>
-                            <option value="rayamangalam">Rayamangalam</option>
-                            <option value="south-cheranallur">South Cheranallur</option>
-                            <option value="thirumarady">Thirumarady</option>
-                            <option value="thuruthipuram">Thuruthipuram</option>
-                            <option value="thripunithura">Thripunithura</option>
-                            <option value="vadakara">Vadakara</option>
-                            <option value="varappetty">Varappetty</option>
-                            <option value="varapuzha">Varapuzha</option>
-                            <option value="vazhakulam">Vazhakulam</option>
-                            <option value="vengola">Vengola</option>
-                            <option value="vyttila">Vyttila</option>
-                            <option value="perumbavoor">Perumbavoor</option>
-                </select>
-                <a class="btn" onclick="searchCity(document.querySelector('.form-control').value)">
-                    <img src="/assets/img/icons/search-normal.svg" alt />
-                </a>
-            </form>
-        </div>
-        
-        
-        <ul class="nav user-menu float-end">
-            <a href="/chat" style="text-decoration: none; margin-top: 14px;">
-            <span class="user-img" style="display: flex; align-items: center; margin-left: 100px;">
-                
-                <img src="https://pbs.twimg.com/media/GDyl5j7aoAAMZ7X.jpg" alt="Admin" style="margin-right: 10px; transition: box-shadow 0.3s;" onmouseover="this.style.boxShadow='0 0 15px 5px #00D3C rgba(0,0,0,0.5)';" onmouseout="this.style.boxShadow='none';" />
-                <h5 style="margin: 0; margin-right: 20px;">Ask Ai</h5>
-            
-            </span>
-            </a>
-            
-            
-             
-          <li class="nav-item dropdown has-arrow user-profile-list">
-            <a
-              href="#"
-              class="dropdown-toggle nav-link user-link"
-              data-bs-toggle="dropdown"
-            >
-            
-              <div class="user-names">
-                <% if (user) { %>
-                <h5> <%= user.name %></h5>
+      <div class="top-nav-search mob-view">
+        <form>
+          <select class="form-control" onchange="searchCity(this.value)">
+            <option value="Null">Select another city.</option>
+            <option value="thiruvananthapuram">Thiruvananthapuram</option>
+            <option value="kochi">Kochi</option>
+            <option value="kozhikode">Kozhikode</option>
+            <option value="thrissur">Thrissur</option>
+            <option value="kollam">Kollam</option>
+            <option value="palakkad">Palakkad</option>
+            <option value="malappuram">Malappuram</option>
+            <option value="kannur">Kannur</option>
+            <option value="alappuzha">Alappuzha</option>
+            <option value="kottayam">Kottayam</option>
+            <option value="pathanamthitta">Pathanamthitta</option>
+            <option value="idukki">Idukki</option>
+            <option value="wayanad">Wayanad</option>
+            <option value="kasaragod">Kasaragod</option>
+            <option value="ernakulam">Ernakulam</option>
+            <option value="kothamangalam">Kothamangalam</option>
+            <option value="muvattupuzha">Muvattupuzha</option>
+            <option value="north paravur">North Paravur</option>
+            <option value="aluva">Aluva</option>
+            <option value="angamaly">Angamaly</option>
+            <option value="aluva">Aluva</option>
+            <option value="angamaly">Angamaly</option>
+            <option value="arakuzha">Arakuzha</option>
+            <option value="choondy">Choondy</option>
+            <option value="eernakulam">Eernakulam</option>
+            <option value="edakkattuvayal">Edakkattuvayal</option>
+            <option value="edathala">Edathala</option>
+            <option value="elavoor">Elavoor</option>
+            <option value="irumbanam">Irumbanam</option>
+            <option value="kanjoor">Kanjoor</option>
+            <option value="karukutty">Karukutty</option>
+            <option value="keezhmad">Keezhmad</option>
+            <option value="kizhakkambalam">Kizhakkambalam</option>
+            <option value="kolenchery">Kolenchery</option>
+            <option value="koratty">Koratty</option>
+            <option value="kothamangalam">Kothamangalam</option>
+            <option value="kunnathunad">Kunnathunad</option>
+            <option value="malayattoor-nadayar">Malayattoor-Nadayar</option>
+            <option value="maneed">Maneed</option>
+            <option value="marampally">Marampally</option>
+            <option value="marady">Marady</option>
+            <option value="marakkaravazhy">Marakkaravazhy</option>
+            <option value="maruthayoor">Maruthayoor</option>
+            <option value="mulanthuruthy">Mulanthuruthy</option>
+            <option value="muvattupuzha">Muvattupuzha</option>
+            <option value="nayarambalam">Nayarambalam</option>
+            <option value="north-paravur">North Paravur</option>
+            <option value="palissery">Palissery</option>
+            <option value="panampilly-nagar">Panampilly Nagar</option>
+            <option value="parakkadavu">Parakkadavu</option>
+            <option value="paravur">Paravur</option>
+            <option value="payipra">Payipra</option>
+            <option value="payyappilly">Payyappilly</option>
+            <option value="perumbavoor">Perumbavoor</option>
+            <option value="perumthuruthy">Perumthuruthy</option>
+            <option value="pindimana">Pindimana</option>
+            <option value="piravom">Piravom</option>
+            <option value="pookkattupady">Pookkattupady</option>
+            <option value="rayamangalam">Rayamangalam</option>
+            <option value="south-cheranallur">South Cheranallur</option>
+            <option value="thirumarady">Thirumarady</option>
+            <option value="thuruthipuram">Thuruthipuram</option>
+            <option value="thripunithura">Thripunithura</option>
+            <option value="vadakara">Vadakara</option>
+            <option value="varappetty">Varappetty</option>
+            <option value="varapuzha">Varapuzha</option>
+            <option value="vazhakulam">Vazhakulam</option>
+            <option value="vengola">Vengola</option>
+            <option value="vyttila">Vyttila</option>
+            <option value="perumbavoor">Perumbavoor</option>
+          </select>
+          <a class="btn" onclick="searchCity(document.querySelector('.form-control').value)">
+            <img src="/assets/img/icons/search-normal.svg" alt />
+          </a>
+        </form>
+      </div>
+
+
+      <ul class="nav user-menu float-end">
+        <a href="/chat" style="text-decoration: none; margin-top: 14px;">
+          <span class="user-img" style="display: flex; align-items: center; margin-left: 100px;">
+
+            <img src="https://pbs.twimg.com/media/GDyl5j7aoAAMZ7X.jpg" alt="Admin"
+              style="margin-right: 10px; transition: box-shadow 0.3s;"
+              onmouseover="this.style.boxShadow='0 0 15px 5px #00D3C rgba(0,0,0,0.5)';"
+              onmouseout="this.style.boxShadow='none';" />
+            <h5 style="margin: 0; margin-right: 20px;">Ask Ai</h5>
+
+          </span>
+        </a>
+
+
+
+        <li class="nav-item dropdown has-arrow user-profile-list">
+          <a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+
+            <div class="user-names">
+              <% if (user) { %>
+                <h5>
+                  <%= user.name %>
+                </h5>
                 <% } %>
-                <span>User</span>
-              </div>
-              <span class="user-img">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/280/651/small_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg" alt="Admin" />
-              </span>
-              
-              
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="profile.html">My Profile</a>
-              <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-              <a class="dropdown-item" href="settings.html">Settings</a>
-              <a class="dropdown-item" href="login.html">Logout</a>
+                  <span>User</span>
             </div>
-          </li>
-          <li class="nav-item">
-            <a href="settings.html" class="hasnotifications nav-link"
-              ><img src="/assets/img/icons/setting-icon-01.svg" alt />
-            </a>
-          </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-end">
-          <a
-            href="#"
-            class="dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            ><i class="fa-solid fa-ellipsis-vertical"></i
-          ></a>
-          <div class="dropdown-menu dropdown-menu-end">
+            <span class="user-img">
+              <img
+                src="https://static.vecteezy.com/system/resources/thumbnails/036/280/651/small_2x/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"
+                alt="Admin" />
+            </span>
+
+
+          </a>
+          <div class="dropdown-menu">
             <a class="dropdown-item" href="profile.html">My Profile</a>
             <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
             <a class="dropdown-item" href="settings.html">Settings</a>
             <a class="dropdown-item" href="login.html">Logout</a>
           </div>
+        </li>
+        <li class="nav-item">
+          <a href="settings.html" class="hasnotifications nav-link"><img src="/assets/img/icons/setting-icon-01.svg"
+              alt />
+          </a>
+        </li>
+      </ul>
+      <div class="dropdown mobile-user-menu float-end">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+            class="fa-solid fa-ellipsis-vertical"></i></a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item" href="profile.html">My Profile</a>
+          <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+          <a class="dropdown-item" href="settings.html">Settings</a>
+          <a class="dropdown-item" href="login.html">Logout</a>
         </div>
       </div>
-      <div class="sidebar" id="sidebar" style="background-image: url('https://images.pexels.com/photos/5452231/pexels-photo-5452231.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
-        <div class="sidebar-inner slimscroll text-center" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-          <div class="carousel-caption d-none d-md-block" style="position: relative; bottom: 80px; left: 10px; right: 0; padding: 2rem 1rem;; background-color: rgba(255, 0, 0, 0); color: #fff;">
-            <h5 style="margin-bottom: 210px; color: #2E37A4; font-size: 30px;">Med<span style="color: green;">ease</span> </h5>
-            <p style="margin: 0 auto;padding-top: 10px; ">"Your Trusted Companion on the Path to Wellness, Offering Compassionate Guidance and Seamless Solutions for Effortless Healthcare Access and Healing Every Step of the Way."</p>
-          </div>
-          
+    </div>
+    <div class="sidebar" id="sidebar"
+      style="background-image: url('https://images.pexels.com/photos/5452231/pexels-photo-5452231.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
+      <div class="sidebar-inner slimscroll text-center"
+        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <div class="carousel-caption d-none d-md-block"
+          style="position: relative; bottom: 80px; left: 10px; right: 0; padding: 2rem 1rem;; background-color: rgba(255, 0, 0, 0); color: #fff;">
+          <h5 style="margin-bottom: 210px; color: #2E37A4; font-size: 30px;">Med<span style="color: green;">ease</span>
+          </h5>
+          <p style="margin: 0 auto;padding-top: 10px; ">"Your Trusted Companion on the Path to Wellness, Offering
+            Compassionate Guidance and Seamless Solutions for Effortless Healthcare Access and Healing Every
+            Step of the Way."</p>
         </div>
+
       </div>
-      <div class="page-wrapper">
-        <div class="content">
-          <div class="page-header">
-            <div class="row">
-              <div class="col-sm-12">
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="index.html">Dashboard </a>
-                  </li>
-                 
-                  <li class="breadcrumb-item active">Patient Dashboard</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="good-morning-blk">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="morning-user">
-                  <% if (user) { %>
-                        <h2>Good Morning, <span>
-                            <%= user.name %>
-                          </span></h2>
-                        <p>Have a nice day at work</p>
-                  <% } %>
-              
-                </div>
-              </div>
-              <div class="col-md-6 position-blk">
-                <div class="morning-img">
-                  <img src="/assets/img/morning-img-03.png" alt />
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- carosal -->
-          <div class="good-morning-blk">
-            <div class="row carousel-inner">
-                
-              <div class="col-md-6 carousel-item active">
-                <div class="morning-img">
-                  <img src="/assets/img/morning-img-01.png" alt />
-                 
-                </div>
-              </div>
-              <div class="col-md-6 carousel-item">
-                <div class="morning-img">
-                  <img src="/assets/img/morning-img-02.png" alt />
-                </div>
-              </div>
-              <div class="col-md-6 carousel-item">
-                <div class="morning-img">
-                  <img src="/assets/img/morning-img-03.png" alt />
-                </div>
-              </div>
-            </div>
-          </div>
-
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <div class="page-header">
           <div class="row">
-            <div class="col-12 col-md-6 col-xl-3 d-flex">
-              <div class="card report-blk">
-                <div class="card-body">
-                  <div class="report-head">
-                    <h4>
-                        <a href="/enterdetials" style="text-decoration: none;">
-                      <img
-                      style="height: 80px;width: 80px;"
+            <div class="col-sm-12">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/patient-dashboard">Dashboard </a>
+                </li>
+
+                <li class="breadcrumb-item active">Patient Dashboard</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="good-morning-blk">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="morning-user">
+                <% if (user) { %>
+                  <h2>Good Morning, <span>
+                      <%= user.name %>
+                    </span></h2>
+                  <p>Have a nice day at work</p>
+                  <% } %>
+
+              </div>
+            </div>
+            <div class="col-md-6 position-blk">
+              <div class="morning-img">
+                <img src="/assets/img/morning-img-03.png" alt />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- carosal -->
+        <div class="good-morning-blk">
+          <div class="row carousel-inner">
+
+            <div class="col-md-6 carousel-item active">
+              <div class="morning-img">
+                <img src="/assets/img/morning-img-01.png" alt />
+
+              </div>
+            </div>
+            <div class="col-md-6 carousel-item">
+              <div class="morning-img">
+                <img src="/assets/img/morning-img-02.png" alt />
+              </div>
+            </div>
+            <div class="col-md-6 carousel-item">
+              <div class="morning-img">
+                <img src="/assets/img/morning-img-03.png" alt />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-6 col-xl-3 d-flex">
+            <div class="card report-blk">
+              <div class="card-body">
+                <div class="report-head">
+                  <h4>
+                    <a href="/enterdetials" style="text-decoration: none;">
+                      <img style="height: 80px;width: 80px;"
                         src="https://as1.ftcdn.net/v2/jpg/01/62/59/04/1000_F_162590462_StuNG5boff6MVrZOCmbnDv8HPNfITqZl.jpg"
-                        class="me-2"
-                        alt
-                      />Consult Doctors</a>
-                    </h4>
-                  </div>
-                  <div id="heart-rate"></div>
-                  <div class="dash-content " style="text-align: center;">
-                    <!-- <h5>110 <span>bpm</span></h5> -->
-                    <hr>
-                    <p>
-                        <a href="/enterdetials"><span class="passive-view"
-                            ><i class="feather-arrow-up-right me-1"></i>Find Nearest Doctor</span
-                          ></a>
-                      
-                      
-                    </p>
-                  </div>
+                        class="me-2" alt />Consult Doctors</a>
+                  </h4>
+                </div>
+                <div id="heart-rate"></div>
+                <div class="dash-content " style="text-align: center;">
+                  <!-- <h5>110 <span>bpm</span></h5> -->
+                  <hr>
+                  <p>
+                    <a href="/enterdetials"><span class="passive-view"><i class="feather-arrow-up-right me-1"></i>Find
+                        Nearest Doctor</span></a>
+
+
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
 
 
-            <div class="col-12 col-md-6 col-xl-3 d-flex">
-                <div class="card report-blk">
-                    <div class="card-body">
-                      <div class="report-head">
-                        <h4>
-                            <a href="/prescriptionassist" style="text-decoration: none;">
-                          <img
-                          style="height: 50px;width: 50px; margin: 10px; "
-                            src="https://clipart-library.com/images/KLTdBMji4.jpg"
-                            class="me-2"
-                            alt
-                          />Prescription Assist</a>
-                        </h4>
-                      </div>
-                      <div id="heart-rate"></div>
-                      <div class="dash-content " style="text-align: center;">
-                        <!-- <h5>110 <span>bpm</span></h5> -->
-                        <hr>
+          <div class="col-12 col-md-6 col-xl-3 d-flex">
+            <div class="card report-blk">
+              <div class="card-body">
+                <div class="report-head">
+                  <h4>
+                    <a href="/prescriptionassist" style="text-decoration: none;">
+                      <img style="height: 50px;width: 50px; margin: 10px; "
+                        src="https://clipart-library.com/images/KLTdBMji4.jpg" class="me-2" alt />Prescription
+                      Assist</a>
+                  </h4>
+                </div>
+                <div id="heart-rate"></div>
+                <div class="dash-content " style="text-align: center;">
+                  <!-- <h5>110 <span>bpm</span></h5> -->
+                  <hr>
+                  <p>
+                    <a href="/prescriptionassist" style="text-decoration: none;">
+
+                      <span class="passive-view"><i class="feather-arrow-up-right me-1"></i>Understand Your Prescription
+                        for Free </span>
+                    </a>
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-12 col-md-6 col-xl-3 d-flex">
+            <div class="card report-blk">
+              <div class="card-body">
+                <div class="report-head">
+                  <h4>
+                    <a href="/appointment" style="text-decoration: none;">
+                      <img style="margin: 5px; height: 50px; width: 50px;"
+                        src="https://www.pngitem.com/pimgs/m/473-4734137_schedule-your-appointment-icon-hd-png-download.png"
+                        class="me-2" alt />Appointments
+                    </a>
+                  </h4>
+                </div>
+                <div id="pressure-chart"></div>
+                <div class="dash-content">
+                  <hr>
+                  <p>
+                    <a href="/appointment" style="text-decoration: none;">
+
+                      <span class="passive-view" style="text-align: center;"><i
+                          class="feather-arrow-up-right me-1"></i>Book Anytime, Anywhere Online and Offline </span>
+                    </a>
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 ">
+            <div class="card report-blk">
+              <div class="card-body">
+                <div class="report-head">
+                  <h4>
+                    <a href="/pharma" style="text-decoration: none;">
+                      <img style="margin: 10px;"
+                        src="https://i.pinimg.com/564x/d1/dd/88/d1dd8891a037a9bfd4d4f615e6cabd53.jpg" class="me-2"
+                        alt />E-pharma</a>
+                  </h4>
+                </div>
+                <div id="sleep-chart"></div>
+                <div class="dash-content">
+                  <!-- <h5>7<span>h</span> 30 <span>m</span></h5> -->
+                  <hr>
+                  <p>
+                    <a href="/pharma" style="text-decoration: none;">
+
+                      <span class="passive-view"><i class="feather-arrow-up-right me-1"></i>Get Your Meds, Effortlessly,
+                        Right to Your Door! </span>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-12 col-xl-12">
+            <div class="row">
+              <div class="col-12 col-md-6 col-xl-6 d-flex">
+                <div class="card wallet-widget general-health d-flex align-items-center">
+                  <div class="circle-bar circle-bar2">
+                    <div class="circle-graph2" data-percent="66">
+                      <b>
+                        <img style="height: 100px;"
+                          src="https://www.shutterstock.com/shutterstock/videos/3420913371/thumb/12.jpg?ip=x480" alt />
+                      </b>
+                    </div>
+                  </div>
+                  <div class="main-limit ms-3 ">
+                    <p>Not Feeling Well? </p>
+                    <p>Unsure Whom to Consult?</p>
+                    <div class="d-flex align-items-center" style="margin-left: 10px;">
+                      <a href="/genaral" style="text-decoration: none;">
+                        <h6> <span style=color:#00D3C7 ;>Consult a General Physician Instantly</span> !!! </h6>
+                      </a>
+
+                      <div class="income-value ms-3">
+
                         <p>
-                            <a href="/prescriptionassist" style="text-decoration: none;">
 
-                          <span class="passive-view"
-                            ><i class="feather-arrow-up-right me-1"></i>Understand Your Prescription for Free </span
-                          >
-                        </a>
-                          
+                          <span class="passive-view">
+
+                          </span>
+
                         </p>
                       </div>
                     </div>
-              </div>
-            </div>
-
-
-            <div class="col-12 col-md-6 col-xl-3 d-flex">
-              <div class="card report-blk">
-                <div class="card-body">
-                  <div class="report-head">
-                    <h4>
-                        <a href="/appointment" style="text-decoration: none;">
-                      <img
-                      style="margin: 5px; height: 50px; width: 50px;"
-                        src="https://www.pngitem.com/pimgs/m/473-4734137_schedule-your-appointment-icon-hd-png-download.png"
-                        class="me-2"
-                        alt
-                      />Book an Appoinment
-                    </a>
-                    </h4>
-                  </div>
-                  <div id="pressure-chart"></div>
-                  <div class="dash-content">
-                    <hr>
-                    <p>
-                        <a href="/appointment" style="text-decoration: none;">
-
-                            <span class="passive-view" style="text-align: center;"
-                              ><i class="feather-arrow-up-right me-1"></i>Book Anytime, Anywhere Online and Offline </span
-                            >
-                          </a>
-                     
-                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-12 col-md-6 col-xl-3 ">
-              <div class="card report-blk">
-                <div class="card-body">
-                  <div class="report-head">
-                    <h4>
-                        <a href="/pharma" style="text-decoration: none;">
-                      <img
-                      style="margin: 10px;"
-                        src="https://i.pinimg.com/564x/d1/dd/88/d1dd8891a037a9bfd4d4f615e6cabd53.jpg"
-                        class="me-2"
-                        alt
-                      />E-pharma</a>
-                    </h4>
-                  </div>
-                  <div id="sleep-chart"></div>
-                  <div class="dash-content">
-                    <!-- <h5>7<span>h</span> 30 <span>m</span></h5> -->
-                    <hr>
-                    <p>
-                        <a href="/pharma" style="text-decoration: none;">
 
-                            <span class="passive-view"
-                              ><i class="feather-arrow-up-right me-1"></i>Get Your Meds, Effortlessly, Right to Your Door! </span
-                            >
-                          </a>
-                    </p>
+
+              <div class="col-12 col-md-6 col-xl-6">
+                <div class="card wallet-widget general-health d-flex align-items-center" style="height: 200px;">
+                  <div class="circle-bar circle-bar2">
+                    <div class="circle-graph2" data-percent="66">
+                      <b>
+                        <img height="180px"
+                          src="https://img.freepik.com/premium-vector/health-support-icon_194117-82.jpg" alt />
+                      </b>
+                    </div>
                   </div>
+                  <a href="/premium" style="text-decoration: none;">
+                    <div class="main-limit ms-3">
+                      <p style="font-size: 15px;">Upgrade to </p>
+                      <div class="d-flex align-items-center">
+
+                        <h4 style="padding-left: 10px;">MedPlus</h4>
+
+                      </div>
+
+                      <p style="font-size: 15px; padding-top: 10px; ">Get Extra Fetures</p>
+                    </div>
+                  </a>
+
                 </div>
               </div>
+
+
+
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 col-md-12 col-xl-12">
-              <div class="row">
-                <div class="col-12 col-md-6 col-xl-6 d-flex">
-                    <div class="card wallet-widget general-health d-flex align-items-center">
-                        <div class="circle-bar circle-bar2" >
-                            <div class="circle-graph2" data-percent="66" >
-                                <b>
-                                    <img style="height: 100px;"  src="https://www.shutterstock.com/shutterstock/videos/3420913371/thumb/12.jpg?ip=x480" alt />
-                                </b>
-                            </div>
-                        </div>
-                        <div class="main-limit ms-3 " >
-                            <p>Not Feeling Well? </p>
-                            <p>Unsure Whom to Consult?</p>
-                            <div class="d-flex align-items-center"style="margin-left: 10px;"  >
-                               <a href="/genaral" style="text-decoration: none;" ><h6> <span style=color:#00D3C7 ;>Consult a General Physician Instantly</span> !!! </h6></a> 
-                               
-                                <div class="income-value ms-3">
-                                    
-                                    <p>
-                                        
-                                        <span class="passive-view">
-                                          
-                                        </span>
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                 
-                <div class="col-12 col-md-6 col-xl-6" >
-                    <div class="card wallet-widget general-health d-flex align-items-center" style="height: 200px;">
-                        <div class="circle-bar circle-bar2">
-                            <div class="circle-graph2" data-percent="66">
-                                <b>
-                                    <img height="180px" src="https://img.freepik.com/premium-vector/health-support-icon_194117-82.jpg" alt />
-                                </b>
-                            </div>
-                        </div>
-                        <a href="/premium" style="text-decoration: none;">
-                        <div class="main-limit ms-3">
-                            <p style="font-size: 15px;" >Upgrade to </p>
-                            <div class="d-flex align-items-center">
-                               
-                                <h4 style="padding-left: 10px;">MedPlus</h4>
-                                
-                            </div>
-                        
-                            <p style="font-size: 15px; padding-top: 10px; " >Get Extra Fetures</p>
-                        </div>
-                    </a>
-                        
-                    </div>
-                </div>
-                
 
-                
-              </div>
-            </div>
-            
         </div>
         <div class="notification-box">
           <div class="msg-sidebar notifications msg-noti">
@@ -557,10 +509,8 @@
                         <span class="message-author">Richard Miles </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -575,10 +525,8 @@
                         <span class="message-author">John Doe</span>
                         <span class="message-time">1 Aug</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -593,10 +541,8 @@
                         <span class="message-author"> Tarah Shropshire </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -611,10 +557,8 @@
                         <span class="message-author">Mike Litorus</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -629,10 +573,8 @@
                         <span class="message-author"> Catherine Manseau </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -647,10 +589,8 @@
                         <span class="message-author"> Domenic Houston </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -665,10 +605,8 @@
                         <span class="message-author"> Buster Wigton </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -683,10 +621,8 @@
                         <span class="message-author"> Rolland Webber </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -701,10 +637,8 @@
                         <span class="message-author"> Claire Mapes </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -719,10 +653,8 @@
                         <span class="message-author">Melita Faucher</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -737,10 +669,8 @@
                         <span class="message-author">Jeffery Lalor</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -755,10 +685,8 @@
                         <span class="message-author">Loren Gatlin</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -773,10 +701,8 @@
                         <span class="message-author">Tarah Shropshire</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -792,77 +718,34 @@
     </div>
     <div class="sidebar-overlay" data-reff></div>
 
-    <script
-      src="/assets/js/jquery-3.7.1.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/js/jquery-3.7.1.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/js/bootstrap.bundle.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/js/bootstrap.bundle.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/js/feather.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/js/feather.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/js/jquery.slimscroll.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/js/jquery.slimscroll.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/js/select2.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/js/select2.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/plugins/datatables/jquery.dataTables.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
-    <script
-      src="/assets/plugins/datatables/datatables.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"
+      type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
+    <script src="/assets/plugins/datatables/datatables.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/plugins/simple-calendar/jquery.simple-calendar.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/calander.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/plugins/simple-calendar/jquery.simple-calendar.js"
+      type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
+    <script src="/assets/js/calander.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/plugins/apexchart/apexcharts.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
-    <script
-      src="/assets/plugins/apexchart/chart-data.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/plugins/apexchart/apexcharts.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
+    <script src="/assets/plugins/apexchart/chart-data.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/js/circle-progress.min.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/js/circle-progress.min.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/plugins/slick/slick.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
+    <script src="/assets/plugins/slick/slick.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
 
-    <script
-      src="/assets/js/app.js"
-      type="d2fd41e3bd242661d741f2b7-text/javascript"
-    ></script>
-    <script
-      src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-      data-cf-settings="d2fd41e3bd242661d741f2b7-|49"
-      defer
-    ></script>
+    <script src="/assets/js/app.js" type="d2fd41e3bd242661d741f2b7-text/javascript"></script>
+    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+      data-cf-settings="d2fd41e3bd242661d741f2b7-|49" defer></script>
     <script>
       $(document).ready(function () {
         $("#sidebarCarousel").carousel({
@@ -871,7 +754,7 @@
         });
       });
     </script>
-  </body>
+</body>
 
-  
+
 </html>

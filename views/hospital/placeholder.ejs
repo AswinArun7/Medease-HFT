@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="/assets/css/feather.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 </head>
+
 <body>
     <div class="main-wrapper">
         <div class="header">
@@ -20,15 +22,6 @@
                     <img src="/assets/img/logo.png" width="35" height="35" alt />
                     <span>Pre Clinic</span>
                 </a>
-            </div>
-            <a id="toggle_btn" href="javascript:void(0);"><img src="/assets/img/icons/bar-icon.svg" alt /></a>
-            <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="/assets/img/icons/bar-icon.svg"
-                    alt /></a>
-            <div class="top-nav-search mob-view">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search here" />
-                    <a class="btn"><img src="/assets/img/icons/search-normal.svg" alt /></a>
-                </form>
             </div>
             <ul class="nav user-menu float-end">
                 <li class="nav-item dropdown d-none d-md-block">
@@ -89,7 +82,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
-                     <ul>
+                    <ul>
                         <li class="menu-title">Main</li>
                         <li class="submenu">
                             <a href="#"><span class="menu-side"><img src="/assets/img/icons/menu-icon-01.svg"
@@ -102,33 +95,33 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="/hospital/getDoctors"><span class="menu-side"><img src="/assets/img/icons/menu-icon-02.svg"
-                                        alt /></span>
+                            <a href="/hospital/getDoctors"><span class="menu-side"><img
+                                        src="/assets/img/icons/menu-icon-02.svg" alt /></span>
                                 <span> Doctors </span> <span class="menu-arrow"></span></a>
                         </li>
                         <li class="submenu">
-                            <a href="/hospital/getPatients"><span class="menu-side"><img src="/assets/img/icons/menu-icon-03.svg"
-                                        alt /></span>
+                            <a href="/hospital/getPatients"><span class="menu-side"><img
+                                        src="/assets/img/icons/menu-icon-03.svg" alt /></span>
                                 <span>Patients </span> <span class="menu-arrow"></span></a>
                         </li>
                         <li class="submenu">
-                            <a href="/hospital/getStaff"><span class="menu-side"><img src="/assets/img/icons/menu-icon-08.svg"
-                                        alt /></span>
+                            <a href="/hospital/getStaff"><span class="menu-side"><img
+                                        src="/assets/img/icons/menu-icon-08.svg" alt /></span>
                                 <span> Staff </span> <span class="menu-arrow"></span></a>
                         </li>
                         <li class="submenu">
-                            <a href="/hospital/getAppointments"><span class="menu-side"><img src="/assets/img/icons/menu-icon-04.svg"
-                                        alt /></span>
+                            <a href="/hospital/getAppointments"><span class="menu-side"><img
+                                        src="/assets/img/icons/menu-icon-04.svg" alt /></span>
                                 <span> Appointments </span> <span class="menu-arrow"></span></a>
                         </li>
                         <li class="submenu">
-                            <a href="/hospital/getSchedule"><span class="menu-side"><img src="/assets/img/icons/menu-icon-05.svg"
-                                        alt /></span>
+                            <a href="/hospital/getSchedule"><span class="menu-side"><img
+                                        src="/assets/img/icons/menu-icon-05.svg" alt /></span>
                                 <span> Doctor Schedule </span> <span class="menu-arrow"></span></a>
                         </li>
                         <li class="submenu">
-                            <a href="/hospital/getDept"><span class="menu-side"><img src="/assets/img/icons/menu-icon-06.svg"
-                                        alt /></span>
+                            <a href="/hospital/getDept"><span class="menu-side"><img
+                                        src="/assets/img/icons/menu-icon-06.svg" alt /></span>
                                 <span> Specialities </span> <span class="menu-arrow"></span></a>
                         </li>
                     </ul>
@@ -152,7 +145,9 @@
                                 <li class="breadcrumb-item">
                                     <i class="feather-chevron-right"></i>
                                 </li>
-                                <li class="breadcrumb-item active"><%= title %></li>
+                                <li class="breadcrumb-item active">
+                                    <%= title %>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -166,14 +161,17 @@
                                     <div class="row align-items-center">
                                         <div class="col">
                                             <div class="doctor-table-blk">
-                                                <h3><%= title %></h3>
+                                                <h3>
+                                                    <%= title %>
+                                                </h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 text-center" style="padding: 50px;">
-                                        <img src="/assets/img/icons/maintenance.svg" alt="Under Construction" style="width: 100px; margin-bottom: 20px;">
+                                        <img src="/assets/img/icons/maintenance.svg" alt="Under Construction"
+                                            style="width: 100px; margin-bottom: 20px;">
                                         <h4>This feature is coming soon!</h4>
                                         <p>We are working hard to bring you the <%= title %> feature.</p>
                                     </div>
@@ -192,4 +190,5 @@
     <script src="/assets/js/jquery.slimscroll.js"></script>
     <script src="/assets/js/app.js"></script>
 </body>
+
 </html>

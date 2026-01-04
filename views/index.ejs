@@ -1,11 +1,299 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png" />
+  <title>Medease - Select Your Portal</title>
+
+  <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .landing-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Left Side - Illustration */
+    .left-panel {
+      flex: 1;
+      background: linear-gradient(135deg, #5b6fd8 0%, #7b8ee8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 80px 80px 0;
+    }
+
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      top: -150px;
+      left: -150px;
+    }
+
+    .illustration {
+      position: relative;
+      z-index: 2;
+      max-width: 450px;
+      width: 80%;
+    }
+
+    .illustration img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+      border-radius: 20px;
+    }
+
+    /* Right Side - Portal Selection */
+    .right-panel {
+      flex: 1;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    .selection-content {
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 .med {
+      color: #2e37a4
+    }
+
+    .header h1 .ease {
+      color: #008000;
+    }
+
+    .header p {
+      font-size: 0.95rem;
+      color: #718096;
+      display: none;
+    }
+
+    .portal-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .portal-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+    }
+
+    .portal-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .portal-card.patients .portal-icon {
+      background-image: url('/assets/img/patient-icon.png');
+    }
+
+    .portal-card.doctors .portal-icon {
+      background-image: url('/assets/img/doctor-icon.png');
+    }
+
+    .portal-card.hospitals .portal-icon {
+      background-image: url('/assets/img/hospital-icon.png');
+    }
+
+    .portal-info {
+      flex: 1;
+    }
+
+    .portal-info h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #007BFF;
+      margin-bottom: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    .portal-card:hover .portal-info h3 {
+      color: #0056b3;
+    }
+
+    .portal-info p {
+      font-size: 0.875rem;
+      color: #00D3C7;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    .portal-card:hover .portal-info p {
+      color: #009688;
+    }
+
+    .portal-arrow {
+      color: #cbd5e0;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      align-self: flex-end;
+      margin-bottom: 0.25rem;
+    }
+
+    .portal-arrow i {
+      transform: rotate(-45deg);
+      display: inline-block;
+    }
+
+    .portal-card:hover .portal-arrow {
+      color: #4a5568;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 968px) {
+      .landing-container {
+        flex-direction: column;
+      }
+
+      .left-panel {
+        display: none;
+      }
+
+      .right-panel {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .right-panel {
+        padding: 2rem 1.5rem;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .portal-card {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .portal-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="landing-container">
+    <!-- Left Panel - Illustration -->
+    <div class="left-panel">
+      <div class="illustration">
+        <img src="/assets/img/login-02.png" alt="Medical Illustration" />
+      </div>
+    </div>
+
+    <!-- Right Panel - Portal Selection -->
+    <div class="right-panel">
+      <div class="selection-content">
+        <div class="header">
+          <h1><span class="med">Med</span><span class="ease">ease</span></h1>
+          <p>Select your portal to continue</p>
+        </div>
+
+        <div class="portal-options">
+          <!-- Patients Portal -->
+          <a href="/login" class="portal-card patients">
+            <div class="portal-icon"></div>
+            <div class="portal-info">
+              <h3>Patients</h3>
+              <p>Book appointments & manage records</p>
+            </div>
+            <div class="portal-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </a>
+
+          <!-- Doctors Portal -->
+          <a href="/doctor/login" class="portal-card doctors">
+            <div class="portal-icon"></div>
+            <div class="portal-info">
+              <h3>Doctors</h3>
+              <p>Manage appointments & patient care</p>
+            </div>
+            <div class="portal-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </a>
+
+          <!-- Hospitals Portal -->
+          <a href="/hospital/login" class="portal-card hospitals">
+            <div class="portal-icon"></div>
+            <div class="portal-info">
+              <h3>Hospitals</h3>
+              <p>Oversee operations & administration</p>
+            </div>
+            <div class="portal-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/jquery-3.7.1.min.js"></script>
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>

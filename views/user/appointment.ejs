@@ -1,511 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="/assets/img/favicon.png"
-    />
-    <title>Preclinic - Medical & Hospital - Bootstrap 5 Admin Template</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/assets/css/bootstrap.min.css"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png" />
+  <title>Preclinic - Medical & Hospital - Bootstrap 5 Admin Template</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <link
-      rel="stylesheet"
-      href="/assets/plugins/fontawesome/css/fontawesome.min.css"
-    />
-    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
+  <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css" />
 
-    <link
-      rel="stylesheet"
-      href="/assets/css/bootstrap-datetimepicker.min.css"
-    />
+  <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css" />
 
-    <link rel="stylesheet" href="/assets/css/feather.css" />
+  <link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
-  </head>
-  <body>
-    <div class="main-wrapper">
-      <div class="header">
-        <div class="header-left">
-          <a href="index.html" class="logo">
-            <img src="/assets/img/logo.png" width="35" height="35" alt />
-            <span>Medease</span>
+  <link rel="stylesheet" href="/assets/css/feather.css" />
+
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+</head>
+
+<body>
+  <div class="main-wrapper">
+    <div class="header">
+      <div class="header-left">
+        <a href="index.html" class="logo">
+          <img src="/assets/img/logo.png" width="35" height="35" alt />
+          <span>Medease</span>
+        </a>
+      </div>
+      <a id="toggle_btn" href="javascript:void(0);"><img src="/assets/img/icons/bar-icon.svg" alt /></a>
+      <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="/assets/img/icons/bar-icon.svg"
+          alt /></a>
+      <div class="top-nav-search mob-view">
+        <form>
+          <input type="text" class="form-control" placeholder="Search here" />
+          <a class="btn"><img src="/assets/img/icons/search-normal.svg" alt /></a>
+        </form>
+      </div>
+      <ul class="nav user-menu float-end">
+        <a href="/chat" style="text-decoration: none; margin-top: 14px;">
+          <span class="user-img" style="display: flex; align-items: center; margin-left: 100px;">
+
+            <img src="https://pbs.twimg.com/media/GDyl5j7aoAAMZ7X.jpg" alt="Admin"
+              style="margin-right: 10px; transition: box-shadow 0.3s;"
+              onmouseover="this.style.boxShadow='0 0 15px 5px #00D3C rgba(0,0,0,0.5)';"
+              onmouseout="this.style.boxShadow='none';" />
+            <h5 style="margin: 0; margin-right: 20px;">Ask Ai</h5>
+
+          </span>
+        </a>
+        <li class="nav-item dropdown d-none d-md-block">
+          <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img
+              src="/assets/img/icons/note-icon-02.svg" alt /><span class="pulse"></span>
           </a>
-        </div>
-        <a id="toggle_btn" href="javascript:void(0);"
-          ><img src="/assets/img/icons/bar-icon.svg" alt
-        /></a>
-        <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"
-          ><img src="/assets/img/icons/bar-icon.svg" alt
-        /></a>
-        <div class="top-nav-search mob-view">
-          <form>
-            <input type="text" class="form-control" placeholder="Search here" />
-            <a class="btn"
-              ><img src="/assets/img/icons/search-normal.svg" alt
-            /></a>
-          </form>
-        </div>
-        <ul class="nav user-menu float-end">
-            <a href="/chat" style="text-decoration: none; margin-top: 14px;">
-                <span class="user-img" style="display: flex; align-items: center; margin-left: 100px;">
-                    
-                    <img src="https://pbs.twimg.com/media/GDyl5j7aoAAMZ7X.jpg" alt="Admin" style="margin-right: 10px; transition: box-shadow 0.3s;" onmouseover="this.style.boxShadow='0 0 15px 5px #00D3C rgba(0,0,0,0.5)';" onmouseout="this.style.boxShadow='none';" />
-                    <h5 style="margin: 0; margin-right: 20px;">Ask Ai</h5>
-                
-                </span>
-                </a>
-          <li class="nav-item dropdown d-none d-md-block">
-            <a
-              href="#"
-              class="dropdown-toggle nav-link"
-              data-bs-toggle="dropdown"
-              ><img src="/assets/img/icons/note-icon-02.svg" alt /><span
-                class="pulse"
-              ></span>
-            </a>
-            <div class="dropdown-menu notifications">
-              <div class="topnav-dropdown-header">
-                <span>Notifications</span>
-              </div>
-              <div class="drop-scroll">
-                <ul class="notification-list">
-                  <li class="notification-message">
-                    <a href="activities.html">
-                      <div class="media">
-                        <span class="avatar">
-                          <img
-                            alt="John Doe"
-                            src="/assets/img/user.jpg"
-                            class="img-fluid"
-                          />
-                        </span>
-                        <div class="media-body">
-                          <p class="noti-details">
-                            <span class="noti-title">John Doe</span> added new
-                            task
-                            <span class="noti-title"
-                              >Patient appointment booking</span
-                            >
-                          </p>
-                          <p class="noti-time">
-                            <span class="notification-time">4 mins ago</span>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="notification-message">
-                    <a href="activities.html">
-                      <div class="media">
-                        <span class="avatar">V</span>
-                        <div class="media-body">
-                          <p class="noti-details">
-                            <span class="noti-title">Tarah Shropshire</span>
-                            changed the task name
-                            <span class="noti-title"
-                              >Appointment booking with payment gateway</span
-                            >
-                          </p>
-                          <p class="noti-time">
-                            <span class="notification-time">6 mins ago</span>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="notification-message">
-                    <a href="activities.html">
-                      <div class="media">
-                        <span class="avatar">L</span>
-                        <div class="media-body">
-                          <p class="noti-details">
-                            <span class="noti-title">Misty Tison</span> added
-                            <span class="noti-title">Domenic Houston</span> and
-                            <span class="noti-title">Claire Mapes</span> to
-                            project
-                            <span class="noti-title"
-                              >Doctor available module</span
-                            >
-                          </p>
-                          <p class="noti-time">
-                            <span class="notification-time">8 mins ago</span>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="notification-message">
-                    <a href="activities.html">
-                      <div class="media">
-                        <span class="avatar">G</span>
-                        <div class="media-body">
-                          <p class="noti-details">
-                            <span class="noti-title">Rolland Webber</span>
-                            completed task
-                            <span class="noti-title"
-                              >Patient and Doctor video conferencing</span
-                            >
-                          </p>
-                          <p class="noti-time">
-                            <span class="notification-time">12 mins ago</span>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="notification-message">
-                    <a href="activities.html">
-                      <div class="media">
-                        <span class="avatar">V</span>
-                        <div class="media-body">
-                          <p class="noti-details">
-                            <span class="noti-title">Bernardo Galaviz</span>
-                            added new task
-                            <span class="noti-title">Private chat module</span>
-                          </p>
-                          <p class="noti-time">
-                            <span class="notification-time">2 days ago</span>
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="topnav-dropdown-footer">
-                <a href="activities.html">View all Notifications</a>
-              </div>
+          <div class="dropdown-menu notifications">
+            <div class="topnav-dropdown-header">
+              <span>Notifications</span>
             </div>
-          </li>
-          <li class="nav-item dropdown d-none d-md-block">
-            <a
-              href="javascript:void(0);"
-              id="open_msg_box"
-              class="hasnotifications nav-link"
-              ><img src="/assets/img/icons/note-icon-01.svg" alt /><span
-                class="pulse"
-              ></span>
-            </a>
-          </li>
-          <li class="nav-item dropdown has-arrow user-profile-list">
-            <a
-              href="#"
-              class="dropdown-toggle nav-link user-link"
-              data-bs-toggle="dropdown"
-            >
-              <!-- <div class="user-names">
+            <div class="drop-scroll">
+              <ul class="notification-list">
+                <li class="notification-message">
+                  <a href="activities.html">
+                    <div class="media">
+                      <span class="avatar">
+                        <img alt="John Doe" src="/assets/img/user.jpg" class="img-fluid" />
+                      </span>
+                      <div class="media-body">
+                        <p class="noti-details">
+                          <span class="noti-title">John Doe</span> added new
+                          task
+                          <span class="noti-title">Patient appointment booking</span>
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time">4 mins ago</span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a href="activities.html">
+                    <div class="media">
+                      <span class="avatar">V</span>
+                      <div class="media-body">
+                        <p class="noti-details">
+                          <span class="noti-title">Tarah Shropshire</span>
+                          changed the task name
+                          <span class="noti-title">Appointment booking with payment gateway</span>
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time">6 mins ago</span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a href="activities.html">
+                    <div class="media">
+                      <span class="avatar">L</span>
+                      <div class="media-body">
+                        <p class="noti-details">
+                          <span class="noti-title">Misty Tison</span> added
+                          <span class="noti-title">Domenic Houston</span> and
+                          <span class="noti-title">Claire Mapes</span> to
+                          project
+                          <span class="noti-title">Doctor available module</span>
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time">8 mins ago</span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a href="activities.html">
+                    <div class="media">
+                      <span class="avatar">G</span>
+                      <div class="media-body">
+                        <p class="noti-details">
+                          <span class="noti-title">Rolland Webber</span>
+                          completed task
+                          <span class="noti-title">Patient and Doctor video conferencing</span>
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time">12 mins ago</span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a href="activities.html">
+                    <div class="media">
+                      <span class="avatar">V</span>
+                      <div class="media-body">
+                        <p class="noti-details">
+                          <span class="noti-title">Bernardo Galaviz</span>
+                          added new task
+                          <span class="noti-title">Private chat module</span>
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time">2 days ago</span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="topnav-dropdown-footer">
+              <a href="activities.html">View all Notifications</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown d-none d-md-block">
+          <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><img
+              src="/assets/img/icons/note-icon-01.svg" alt /><span class="pulse"></span>
+          </a>
+        </li>
+        <li class="nav-item dropdown has-arrow user-profile-list">
+          <a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+            <!-- <div class="user-names">
                 <h5>Liam Michael</h5>
                 <span>Admin</span>
               </div> -->
-              <span class="user-img">
-                <img src="/assets/img/user-06.jpg" alt="Admin" />
-              </span>
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="profile.html">My Profile</a>
-              <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-              <a class="dropdown-item" href="settings.html">Settings</a>
-              <a class="dropdown-item" href="login.html">Logout</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a href="settings.html" class="hasnotifications nav-link"
-              ><img src="/assets/img/icons/setting-icon-01.svg" alt />
-            </a>
-          </li>
-        </ul>
-        <div class="dropdown mobile-user-menu float-end">
-          <a
-            href="#"
-            class="dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            ><i class="fa-solid fa-ellipsis-vertical"></i
-          ></a>
-          <div class="dropdown-menu dropdown-menu-end">
+            <span class="user-img">
+              <img src="/assets/img/user-06.jpg" alt="Admin" />
+            </span>
+          </a>
+          <div class="dropdown-menu">
             <a class="dropdown-item" href="profile.html">My Profile</a>
             <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
             <a class="dropdown-item" href="settings.html">Settings</a>
             <a class="dropdown-item" href="login.html">Logout</a>
           </div>
+        </li>
+        <li class="nav-item">
+          <a href="settings.html" class="hasnotifications nav-link"><img src="/assets/img/icons/setting-icon-01.svg"
+              alt />
+          </a>
+        </li>
+      </ul>
+      <div class="dropdown mobile-user-menu float-end">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+            class="fa-solid fa-ellipsis-vertical"></i></a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item" href="profile.html">My Profile</a>
+          <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
+          <a class="dropdown-item" href="settings.html">Settings</a>
+          <a class="dropdown-item" href="login.html">Logout</a>
         </div>
       </div>
-      <div class="sidebar" id="sidebar" style="background-image: url('https://images.pexels.com/photos/5452231/pexels-photo-5452231.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
-        <div class="sidebar-inner slimscroll text-center" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-          <div class="carousel-caption d-none d-md-block" style="position: relative; bottom: 80px; left: 10px; right: 0; padding: 2rem 1rem;; background-color: rgba(255, 0, 0, 0); color: #fff;">
-            <h5 style="margin-bottom: 210px; color: #2E37A4; font-size: 30px;">Med<span style="color: green;">ease</span> </h5>
-            <p style="margin: 0 auto;padding-top: 10px; ">"Your Trusted Companion on the Path to Wellness, Offering Compassionate Guidance and Seamless Solutions for Effortless Healthcare Access and Healing Every Step of the Way."</p>
-          </div>
-          
+    </div>
+    <div class="sidebar" id="sidebar"
+      style="background-image: url('https://images.pexels.com/photos/5452231/pexels-photo-5452231.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
+      <div class="sidebar-inner slimscroll text-center"
+        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <div class="carousel-caption d-none d-md-block"
+          style="position: relative; bottom: 80px; left: 10px; right: 0; padding: 2rem 1rem;; background-color: rgba(255, 0, 0, 0); color: #fff;">
+          <h5 style="margin-bottom: 210px; color: #2E37A4; font-size: 30px;">Med<span style="color: green;">ease</span>
+          </h5>
+          <p style="margin: 0 auto;padding-top: 10px; ">"Your Trusted Companion on the Path to Wellness, Offering
+            Compassionate Guidance and Seamless Solutions for Effortless Healthcare Access and Healing Every
+            Step of the Way."</p>
         </div>
-      </div><div class="page-wrapper">
-        <div class="content">
-          <div class="page-header">
-            <div class="row">
-              <div class="col-sm-12">
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="appointments.html">Appointment </a>
-                  </li>
-                  <li class="breadcrumb-item">
-                    <i class="feather-chevron-right"></i>
-                  </li>
-                  <li class="breadcrumb-item active">Book Appointment</li>
-                </ul>
-              </div>
-            </div>
-          </div>
 
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+        <div class="page-header">
           <div class="row">
             <div class="col-sm-12">
-              <div class="card">
-                <div class="card-body">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="/patient-dashboard">Dashboard </a>
+                </li>
+                <li class="breadcrumb-item">
+                  <i class="feather-chevron-right"></i>
+                </li>
+                <li class="breadcrumb-item active">Book Appointment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header" style="background: white; border-bottom: 1px solid #e0e0e0; padding: 15px 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h4 id="appointmentHeading" style="margin: 0; color: #333;">Book Appointment</h4>
+                  <div style="display: flex; gap: 10px;">
+                    <button id="bookAppointmentBtn" class="btn btn-primary"
+                      style="border-radius: 5px; padding: 8px 20px;" onclick="switchTab('book')">
+                      Book Appointment
+                    </button>
+                    <button id="myAppointmentsBtn" class="btn btn-outline-primary"
+                      style="border-radius: 5px; padding: 8px 20px;" onclick="switchTab('my')">
+                      My Appointments
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <!-- Book Appointment Form Section -->
+                <div id="bookAppointmentSection">
                   <form action="/book-appointment" method="post">
                     <div class="row">
+
                       <div class="col-12">
-                        <div class="form-heading">
-                          <h4>Patient Details</h4>
+                        <div class="input-block local-top-form">
+                          <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <label style="margin-bottom: 0; margin-right: 10px;">Appointment Mode <span
+                                class="login-danger">*</span>:</label>
+                            <div>
+                              <input type="radio" id="online" name="mode" value="online" checked>
+                              <label for="online"
+                                style="margin-left: 5px; margin-right: 20px; margin-bottom: 0;">Online</label>
+                              <input type="radio" id="offline" name="mode" value="offline">
+                              <label for="offline" style="margin-left: 5px; margin-bottom: 0;">Offline</label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-xl-4">
                         <div class="input-block local-forms">
-                          <label
-                            >First Name
-                            <span class="login-danger">*</span></label
-                          >
+                          <label>First Name
+                            <span class="login-danger">*</span></label>
                           <input name="firstname" class="form-control" type="text" />
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-xl-4">
                         <div class="input-block local-forms">
-                          <label
-                            >Last Name
-                            <span class="login-danger">*</span></label
-                          >
+                          <label>Last Name
+                            <span class="login-danger">*</span></label>
                           <input name="lastname" class="form-control" type="text" />
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-xl-4">
                         <div class="input-block select-gender">
-                          <label class="gen-label"
-                            >Gender<span class="login-danger">*</span></label
-                          >
-                          <div class="form-check-inline">
-                            <label class="form-check-label">
-                              <input
-                                type="radio"
-                                name="gender"
-                                class="form-check-input"
-                              />Male
-                            </label>
-                          </div>
-                          <div class="form-check-inline">
-                            <label class="form-check-label">
-                              <input
-                                type="radio"
-                                name="gender"
-                                class="form-check-input"
-                              />Female
-                            </label>
+                          <div style="display: flex; align-items: center;">
+                            <label style="margin-bottom: 0; margin-right: 10px;">Gender <span
+                                class="login-danger">*</span>:</label>
+                            <div>
+                              <input type="radio" id="male" name="gender" value="male">
+                              <label for="male"
+                                style="margin-left: 5px; margin-right: 15px; margin-bottom: 0;">Male</label>
+                              <input type="radio" id="female" name="gender" value="female">
+                              <label for="female" style="margin-left: 5px; margin-bottom: 0;">Female</label>
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-xl-6">
                         <div class="input-block local-forms">
-                          <label
-                            >Mobile <span class="login-danger">*</span></label
-                          >
+                          <label>Mobile <span class="login-danger">*</span></label>
                           <input name="mobile" class="form-control" type="text" />
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-xl-6">
                         <div class="input-block local-forms">
-                          <label
-                            >Email <span class="login-danger">*</span></label
-                          >
-                          <input name="email" class="form-control" type="email" />
+                          <label>Age <span class="login-danger">*</span></label>
+                          <input name="age" class="form-control" type="number" min="1" max="150" />
                         </div>
                       </div>
                       <div class="col-12 col-sm-12">
                         <div class="input-block local-forms">
-                          <label
-                            >Address <span class="login-danger">*</span></label
-                          >
-                          <textarea name="address"
-                            class="form-control"
-                            rows="3"
-                            cols="30"
-                          ></textarea>
+                          <label>Address <span class="login-danger">*</span></label>
+                          <textarea name="address" class="form-control" rows="3" cols="30"></textarea>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="form-heading">
-                          <h4>Appointment Details</h4>
-                        </div>
-                      </div>
+
                       <div class="col-12 col-md-6 col-xl-4">
                         <div class="input-block local-forms cal-icon">
-                          <label
-                            >Date of Appointment
-                            <span class="login-danger">*</span></label
-                          >
-                          <input name="date"
-                            class="form-control datetimepicker"
-                            type="date"
-                          />
+                          <label>Date of Appointment
+                            <span class="login-danger">*</span></label>
+                          <input name="date" class="form-control datetimepicker" type="date" />
                         </div>
                       </div>
-                      <div class="col-12 col-md-6 col-xl-4">
-                        <div class="input-block local-forms">
-                          <label
-                            >From <span class="login-danger">*</span></label
-                          >
-                          <div class="time-icon">
-                            <input name="from-time"
-                              type="text"
-                              class="form-control"
-                              id="datetimepicker3"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 col-md-6 col-xl-4">
-                        <div class="input-block local-forms">
-                          <label>To <span class="login-danger">*</span></label>
-                          <div class="time-icon">
-                            <input name="to-time"
-                              type="text"
-                              class="form-control"
-                              id="datetimepicker4"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 col-md-6 col-xl-6">
-                        <div class="input-block local-forms">
-                          <label>Consulting Doctor</label>
-                          <select name="doctor" class="form-control select">
-                        
-                            <option>Select Doctor</option>
-                            <% for( doctor of doctors ) { %>
-                              <option value="<%= doctor.firstname %>">Dr. <%= doctor.firstname %></option>
-                            <% } %>
-                           
-                           
-                          </select>
-                        </div>
-                      </div>
+
                       <div class="col-12 col-md-6 col-xl-6">
                         <div class="input-block local-forms">
                           <label>Hospital</label>
                           <select class="form-control" name="hospital" id="hospitalSelect">
                             <option value="">Select Hospital</option>
                             <% for( hospital of hospitals ) { %>
-                              <option value="<%= hospital.username %>">Dr .<%= hospital.username %></option>
-                            <% } %>
-                            
-                           
-                            <!-- Add more hospitals here -->
+                              <option value="<%= hospital.username %>">Dr .<%= hospital.username %>
+                              </option>
+                              <% } %>
+
+
+                                <!-- Add more hospitals here -->
                           </select>
                         </div>
                       </div>
                       <div class="col-12 col-md-6 col-xl-6">
                         <div class="input-block local-forms">
-                          <label>Symptoms</label>
-                        <select class="form-control" name="symptoms" id="symptomsSelect">
-                          <option value="">Select Symptom</option>
-                          <option value="Fever">Fever</option>
-                          <option value="Cough">Cough</option>
-                          <option value="Headache">Headache</option>
-                          <option value="Fatigue">Fatigue</option>
-                          <option value="Shortness of Breath">Shortness of Breath</option>
-                          <option value="Muscle Aches">Muscle Aches</option>
-                          <option value="Sore Throat">Sore Throat</option>
-                          <option value="Loss of Taste or Smell">Loss of Taste or Smell</option>
-                          <option value="Nausea">Nausea</option>
-                          <option value="Diarrhea">Diarrhea</option>
-                          <option value="Chills">Chills</option>
-                          <option value="Chest Pain">Chest Pain</option>
-                          <option value="Difficulty Breathing">Difficulty Breathing</option>
-                          <option value="Dizziness">Dizziness</option>
-                          <option value="Weakness">Weakness</option>
-                          <option value="Abdominal Pain">Abdominal Pain</option>
-                          <option value="Joint Pain">Joint Pain</option>
-                          <option value="Loss of Appetite">Loss of Appetite</option>
-                          <option value="Rash">Rash</option>
-                          <option value="Vomiting">Vomiting</option>
-                          <option value="Swollen Lymph Nodes">Swollen Lymph Nodes</option>
-                          <option value="Difficulty Swallowing">Difficulty Swallowing</option>
-                          <option value="Dry Cough">Dry Cough</option>
-                          <option value="Frequent Urination">Frequent Urination</option>
-                          <option value="Back Pain">Back Pain</option>
-                          <option value="Constipation">Constipation</option>
-                          <option value="Sweating">Sweating</option>
-                          <option value="Heartburn">Heartburn</option>
-                          <option value="Bloating">Bloating</option>
-                          <option value="Weight Loss">Weight Loss</option>
-                          <option value="Insomnia">Insomnia</option>
-                          <option value="Anxiety">Anxiety</option>
-                          <option value="Depression">Depression</option>
-                          <option value="Memory Loss">Memory Loss</option>
-                          <option value="Nasal Congestion">Nasal Congestion</option>
-                          <option value="Runny Nose">Runny Nose</option>
-                          <option value="Sneezing">Sneezing</option>
-                          <option value="Itchy Eyes">Itchy Eyes</option>
-                          <option value="Wheezing">Wheezing</option>
-                          <option value="Chest Tightness">Chest Tightness</option>
-                        </select>
+                          <label>Speciality</label>
+                          <select class="form-control" name="specialty" id="specialtySelect">
+                            <option value="">Select Speciality</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Endocrinology">Endocrinology</option>
+                            <option value="Gastroenterology">Gastroenterology</option>
+                            <option value="Hematology">Hematology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Oncology">Oncology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Pulmonology">Pulmonology</option>
+                            <option value="Radiology">Radiology</option>
+                          </select>
                         </div>
                       </div>
-                      
                       <div class="col-12 col-md-6 col-xl-6">
-                        <div class="input-block local-top-form">
-                            
-                            <div>
-                                <input type="radio" id="online" name="mode" value="online" checked>
-                                <label for="online">Online</label>
-                                <input type="radio" id="offline" name="mode" value="offline">
-                                <label for="offline">Offline</label>
-                            </div>
+                        <div class="input-block local-forms">
+                          <label>Consulting Doctor</label>
+                          <input type="hidden" name="doctor" id="selectedDoctorValue" />
+                          <div class="form-control p-0 d-flex align-items-center"
+                            style="overflow: hidden; height: 46px;">
+                            <button type="button" class="btn rounded-0 h-100 px-3" onclick="openDoctorSelector()"
+                              style="background-color: #e9ecef; border: none; color: #495057; border-right: 1px solid #ced4da;">
+                              Choose Doctor*
+                            </button>
+                            <span id="selectedDoctorDisplay" class="ms-3 text-muted">No doctor selected</span>
+                          </div>
+                          <!-- Doctor data stored in hidden script tag -->
+                          <script type="application/json" id="doctorData">
+                            [
+                              <% for(let i = 0; i < doctors.length; i++) { %>
+                                {"name": "<%= doctors[i].firstname %>", "department": "<%= doctors[i].department %>"}<%- i < doctors.length - 1 ? ',' : '' %>
+                              <% } %>
+                            ]
+                          </script>
                         </div>
-                    </div>
-                    
+                      </div>
+
+
+
                       <div class="col-12">
                         <div class="doctor-submit text-end">
-                          <button
-                            type="submit"
-                            class="btn btn-primary submit-form me-2"
-                          >
+                          <button type="submit" class="btn btn-primary submit-form me-2">
                             Submit
                           </button>
-                          <button
-                            type="button"
-                            class="btn btn-primary cancel-form"
-                          >
+                          <button type="button" class="btn btn-primary cancel-form">
                             Cancel
                           </button>
                         </div>
                       </div>
                     </div>
                   </form>
+                </div>
+
+                <!-- My Appointments Section -->
+                <div id="myAppointmentsSection" style="display: none;">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 style="margin-bottom: 20px; color: #333;">Your Appointments</h5>
+                      <div class="alert alert-info" style="text-align: center; padding: 40px;">
+                        <i class="fas fa-calendar-times"
+                          style="font-size: 48px; color: #6c757d; margin-bottom: 15px;"></i>
+                        <h6 style="color: #6c757d;">You have no pending appointments</h6>
+                      </div>
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
             </div>
@@ -528,10 +433,8 @@
                         <span class="message-author">Richard Miles </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -546,10 +449,8 @@
                         <span class="message-author">John Doe</span>
                         <span class="message-time">1 Aug</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -564,10 +465,8 @@
                         <span class="message-author"> Tarah Shropshire </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -582,10 +481,8 @@
                         <span class="message-author">Mike Litorus</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -600,10 +497,8 @@
                         <span class="message-author"> Catherine Manseau </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -618,10 +513,8 @@
                         <span class="message-author"> Domenic Houston </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -636,10 +529,8 @@
                         <span class="message-author"> Buster Wigton </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -654,10 +545,8 @@
                         <span class="message-author"> Rolland Webber </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -672,10 +561,8 @@
                         <span class="message-author"> Claire Mapes </span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -690,10 +577,8 @@
                         <span class="message-author">Melita Faucher</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -708,10 +593,8 @@
                         <span class="message-author">Jeffery Lalor</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -726,10 +609,8 @@
                         <span class="message-author">Loren Gatlin</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -744,10 +625,8 @@
                         <span class="message-author">Tarah Shropshire</span>
                         <span class="message-time">12:28 AM</span>
                         <div class="clearfix"></div>
-                        <span class="message-content"
-                          >Lorem ipsum dolor sit amet, consectetur
-                          adipiscing</span
-                        >
+                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing</span>
                       </div>
                     </div>
                   </a>
@@ -767,9 +646,7 @@
               <img src="/assets/img/sent.png" alt width="50" height="46" />
               <h3>Are you sure want to delete this ?</h3>
               <div class="m-t-20">
-                <a href="#" class="btn btn-white" data-bs-dismiss="modal"
-                  >Close</a
-                >
+                <a href="#" class="btn btn-white" data-bs-dismiss="modal">Close</a>
                 <button type="submit" class="btn btn-danger">Delete</button>
               </div>
             </div>
@@ -778,45 +655,112 @@
       </div>
     </div>
     <div class="sidebar-overlay" data-reff></div>
-    <script
-      src="/assets/js/jquery-3.7.1.min.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/bootstrap.bundle.min.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/feather.min.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/jquery.slimscroll.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/select2.min.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
+    <script src="/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/feather.min.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/select2.min.js"></script>
 
-    <script
-      src="/assets/plugins/moment/moment.min.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/bootstrap-datetimepicker.min.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="/assets/js/app.js"
-      type="ecd1e107046e62ce658f5e7a-text/javascript"
-    ></script>
-    <script
-      src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-      data-cf-settings="ecd1e107046e62ce658f5e7a-|49"
-      defer
-    ></script>
-  </body>
+    <script src="/assets/plugins/moment/moment.min.js"></script>
+    <script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+      data-cf-settings="ecd1e107046e62ce658f5e7a-|49" defer></script>
 
-  
+
+    <script>
+      // Get doctor data from JSON
+      function getDoctorData() {
+        const dataElement = document.getElementById('doctorData');
+        if (dataElement) {
+          return JSON.parse(dataElement.textContent);
+        }
+        return [];
+      }
+
+      // Filter doctors based on selected speciality
+      function filterDoctorsBySpeciality() {
+        // Reset doctor selection when specialty changes
+        document.getElementById('selectedDoctorValue').value = '';
+        document.getElementById('selectedDoctorDisplay').textContent = 'No doctor selected';
+        document.getElementById('selectedDoctorDisplay').classList.add('text-muted');
+        document.getElementById('selectedDoctorDisplay').classList.remove('text-dark');
+      }
+
+      // Open doctor selector
+      function openDoctorSelector() {
+        const specialtySelect = document.getElementById('specialtySelect');
+        const selectedSpecialty = specialtySelect ? specialtySelect.value : '';
+
+        if (!selectedSpecialty) {
+          alert('Please select a Speciality first before choosing a doctor.');
+          return;
+        }
+
+        // Get all doctors and filter by specialty
+        const allDoctors = getDoctorData();
+        const filteredDoctors = allDoctors.filter(doc => doc.department === selectedSpecialty);
+
+        if (filteredDoctors.length === 0) {
+          alert('No doctors available for the selected speciality.');
+          return;
+        }
+
+        // Create a simple selection dialog
+        let doctorList = 'Available Doctors:\n\n';
+        filteredDoctors.forEach((doc, index) => {
+          doctorList += `${index + 1}. Dr. ${doc.name}\n`;
+        });
+        doctorList += '\nEnter the number of your choice:';
+
+        const choice = prompt(doctorList);
+
+        if (choice) {
+          const choiceNum = parseInt(choice);
+          if (choiceNum >= 1 && choiceNum <= filteredDoctors.length) {
+            const selectedDoctor = filteredDoctors[choiceNum - 1];
+            document.getElementById('selectedDoctorValue').value = selectedDoctor.name;
+            document.getElementById('selectedDoctorDisplay').textContent = 'Dr. ' + selectedDoctor.name;
+            document.getElementById('selectedDoctorDisplay').classList.remove('text-muted');
+            document.getElementById('selectedDoctorDisplay').classList.add('text-dark');
+          } else {
+            alert('Invalid choice. Please try again.');
+          }
+        }
+      }
+
+      // Add event listener to specialty select
+      document.addEventListener('DOMContentLoaded', function () {
+        const specialtySelect = document.getElementById('specialtySelect');
+        if (specialtySelect) {
+          specialtySelect.addEventListener('change', filterDoctorsBySpeciality);
+        }
+      });
+
+      function switchTab(tab) {
+        const heading = document.getElementById('appointmentHeading');
+        const bookBtn = document.getElementById('bookAppointmentBtn');
+        const myBtn = document.getElementById('myAppointmentsBtn');
+        const bookSection = document.getElementById('bookAppointmentSection');
+        const mySection = document.getElementById('myAppointmentsSection');
+
+        if (tab === 'book') {
+          heading.textContent = 'Book Appointment';
+          bookBtn.className = 'btn btn-primary';
+          myBtn.className = 'btn btn-outline-primary';
+          bookSection.style.display = 'block';
+          mySection.style.display = 'none';
+        } else if (tab === 'my') {
+          heading.textContent = 'My Appointments';
+          bookBtn.className = 'btn btn-outline-primary';
+          myBtn.className = 'btn btn-primary';
+          bookSection.style.display = 'none';
+          mySection.style.display = 'block';
+        }
+      }
+    </script>
+
+</body>
+
+
 </html>

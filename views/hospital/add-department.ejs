@@ -32,15 +32,6 @@
                     <img src="/assets/img/logo.png" width="35" height="35" alt> <span>Medease</span>
                 </a>
             </div>
-            <a id="toggle_btn" href="javascript:void(0);"><img src="/assets/img/icons/bar-icon.svg" alt></a>
-            <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="/assets/img/icons/bar-icon.svg"
-                    alt></a>
-            <div class="top-nav-search mob-view">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search here">
-                    <a class="btn"><img src="/assets/img/icons/search-normal.svg" alt></a>
-                </form>
-            </div>
             <ul class="nav user-menu float-end">
                 <li class="nav-item dropdown d-none d-md-block">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img
@@ -145,8 +136,9 @@
                                 <%=hospital.uniqueCode %>
                             </span>
                         </div>
-                        <span class="user-img">
-                            <img src="/assets/img/user-06.jpg" alt="Admin">
+                        <span class="user-img"
+                            style="background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%;">
+                            <i class="fas fa-building" style="font-size: 20px; color: #6c757d;"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu">
@@ -218,7 +210,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="departments.html">Speciality </a></li>
+                                <li class="breadcrumb-item"><a href="/hospital/Dashboard">Dashboard </a></li>
                                 <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
                                 <li class="breadcrumb-item active">Add Speciality</li>
                             </ul>
