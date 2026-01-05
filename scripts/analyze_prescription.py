@@ -98,7 +98,7 @@ if __name__ == "__main__":
     # Check if image path is provided as command line argument (from Node.js)
     if len(sys.argv) > 1:
         # CLI Mode
-        api_key_env = 'AIzaSyBli-PWU-noPmoJtGYcPhMBU4DYSamo9Zw'
+        api_key_env = 'your_actual_key_here'
         image_path_arg = sys.argv[1]
         analyze_prescription(api_key_env, image_path_arg)
     else:
